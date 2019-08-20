@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    public: false
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand
+    tags:
+      - { name: 'console.command' }
+    arguments:
+      $finder: '@oxid_esales.oxid_eshop_update_component.symfony.component.finder.finder'
+
+  oxid_esales.oxid_eshop_update_component.symfony.component.finder.finder:
+    class: Symfony\Component\Finder\Finder

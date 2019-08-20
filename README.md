@@ -16,7 +16,15 @@ composer require oxid-esales/oxideshop-update-component
 To get list of commands execute:
 
 ```bash
-vendor/bin/oe-console
+vendor/bin/oe-console | grep oe:oxideshop-update-component
+```
+
+## Running tests
+
+To run tests for the component please define OXID eShop bootstrap file:
+
+```bash
+vendor/bin/phpunit --bootstrap=../source/bootstrap.php tests/
 ```
 
 ## Bugs and Issues
