@@ -19,7 +19,29 @@ To get list of commands execute:
 vendor/bin/oe-console | grep oe:oxideshop-update-component
 ```
 
-## Running tests
+## How to install component for development?
+
+Checkout component besides OXID eShop `source` directory:
+
+```bash
+git clone https://github.com/OXID-eSales/oxideshop-update-component.git
+```
+
+Run composer install command:
+
+```bash
+cd oxideshop-update-component
+composer install
+```
+
+Add dependency to OXID eShop `composer.json` file:
+
+```bash
+composer config repositories.oxid-esales/oxideshop-update-component path oxideshop-update-component
+composer require --dev oxid-esales/oxideshop-update-component:*
+```
+
+## How to run tests?
 
 To run tests for the component please define OXID eShop bootstrap file:
 
