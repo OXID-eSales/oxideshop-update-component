@@ -3,7 +3,7 @@ services:
     autowire: true
     public: false
 
-  OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand:
+  oxid_esales.oxid_eshop_update_component.command.install_all_modules_configuration_command:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand
     tags:
       - { name: 'console.command' }
@@ -18,3 +18,12 @@ services:
 
   OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringServiceInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringService
+
+  oxid_esales.oxid_eshop_update_component.service.module_extension_transferring_service:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSortingService
+
+  oxid_esales.oxid_eshop_update_component.service.module_extensions_sorting.extensions_sorter:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSorting\ExtensionsSorter
+
+  oxid_esales.oxid_eshop_update_component.adapter.shop_adapter:
+    class: OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapter
