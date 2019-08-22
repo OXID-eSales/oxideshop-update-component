@@ -7,6 +7,7 @@
 namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\Module\Command;
 
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
+use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\Dao\ModuleConfigurationDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
 use OxidEsales\EshopCommunity\Internal\Utility\ContextInterface;
@@ -16,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
@@ -92,7 +92,7 @@ class InstallAllModulesConfigurationCommandTest extends TestCase
         $application->add(new InstallAllModulesConfigurationCommand(
             $this->get(ModuleConfigurationInstallerInterface::class),
             $context,
-            new Finder()
+            $this->get(FinderFactoryInterface::class)
         ));
 
         $command = $application->find('oe:oxideshop-update-component:install-all-modules');

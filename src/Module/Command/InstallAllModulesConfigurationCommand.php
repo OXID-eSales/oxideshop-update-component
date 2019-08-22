@@ -8,6 +8,7 @@ namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
 use OxidEsales\EshopCommunity\Internal\Application\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
+use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -43,19 +44,19 @@ class InstallAllModulesConfigurationCommand extends Command
 
     /**
      * @param ModuleConfigurationInstallerInterface $moduleConfigurationInstaller
-     * @param BasicContextInterface                 $context
-     * @param Finder                                $finder
-     * @param LoggerInterface                       $logger
+     * @param BasicContextInterface $context
+     * @param FinderFactoryInterface $finderFactory
+     * @param LoggerInterface $logger
      */
     public function __construct(
         ModuleConfigurationInstallerInterface $moduleConfigurationInstaller,
         BasicContextInterface $context,
-        Finder $finder,
+        FinderFactoryInterface $finderFactory,
         LoggerInterface $logger
     ) {
         $this->moduleConfigurationInstaller = $moduleConfigurationInstaller;
         $this->context = $context;
-        $this->finder = $finder;
+        $this->finder = $finderFactory->create();
         $this->logger = $logger;
 
         parent::__construct();
