@@ -12,3 +12,6 @@ services:
 
   oxid_esales.oxid_eshop_update_component.symfony.component.finder.finder:
     class: Symfony\Component\Finder\Finder
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
