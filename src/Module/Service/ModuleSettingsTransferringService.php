@@ -10,6 +10,7 @@ use OxidEsales\EshopCommunity\Internal\Common\Exception\EntryDoesNotExistDaoExce
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\Dao\ShopConfigurationDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\DataObject\ShopConfiguration;
 use OxidEsales\EshopCommunity\Internal\Module\Setting\SettingDaoInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @internal
@@ -27,21 +28,24 @@ class ModuleSettingsTransferringService implements ModuleSettingsTransferingServ
     private $moduleSettingDao;
 
     /**
-     * ModuleSettingsTransferingService constructor.
-     * @param ShopConfigurationDaoInterface $shopConfigurationDao
-     * @param SettingDaoInterface $moduleSettingDao
+     * @var OutputInterface
      */
+    private $output;
+
     public function __construct(
         ShopConfigurationDaoInterface $shopConfigurationDao,
-        SettingDaoInterface $moduleSettingDao
+        SettingDaoInterface $moduleSettingDao,
+        OutputInterface $output
     ) {
         $this->shopConfigurationDao = $shopConfigurationDao;
         $this->moduleSettingDao = $moduleSettingDao;
+        $this->output = $output;
     }
 
     public function transferValuesFromDatabaseToProjectConfiguration(): void
     {
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
+            $this->output->writeln('Transfer module settings for the shop with id ' . $shopId);
             $shopConfiguration = $this->transferValuesToShopConfiguration($shopConfiguration, $shopId);
             $this->shopConfigurationDao->save($shopConfiguration, $shopId);
         }
