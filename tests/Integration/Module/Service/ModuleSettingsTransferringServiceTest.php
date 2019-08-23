@@ -19,13 +19,13 @@ final class ModuleSettingsTransferringServiceTest extends TestCase
 {
     use ContainerTrait;
 
-    public function testTransfering(): void
+    public function testTransferring(): void
     {
         $this->prepareTestSettingsInDatabase();
         $this->prepareTestProjectConfiguration();
 
-        $moduleSettingsTransferingService = $this->get(ModuleSettingsTransferringServiceInterface::class);
-        $moduleSettingsTransferingService->transferValuesFromDatabaseToProjectConfiguration();
+        $moduleSettingsTransferringService = $this->get(ModuleSettingsTransferringServiceInterface::class);
+        $moduleSettingsTransferringService->transferValuesFromDatabaseToProjectConfiguration();
 
         $shopConfigurationDao = $this->get(ShopConfigurationDaoInterface::class);
 
