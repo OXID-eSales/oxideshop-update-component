@@ -15,3 +15,6 @@ services:
 
   OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringServiceInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringService
