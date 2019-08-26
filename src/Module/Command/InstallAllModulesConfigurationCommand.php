@@ -6,8 +6,10 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
+use OxidEsales\EshopCommunity\Internal\Application\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,9 +21,6 @@ use Symfony\Component\Finder\Finder;
  */
 class InstallAllModulesConfigurationCommand extends Command
 {
-    public const MESSAGE_INSTALLATION_WAS_SUCCESSFUL = 'All module configurations have been installed.';
-    public const MESSAGE_INSTALLATION_FAILED = 'An error occurred while installing module configurations.';
-
     /**
      * @var ModuleConfigurationInstallerInterface
      */
@@ -38,18 +37,26 @@ class InstallAllModulesConfigurationCommand extends Command
     private $finder;
 
     /**
+     * @var LoggerInterface\
+     */
+    private $logger;
+
+    /**
      * @param ModuleConfigurationInstallerInterface $moduleConfigurationInstaller
-     * @param BasicContextInterface $context
-     * @param Finder $finder
+     * @param BasicContextInterface                 $context
+     * @param Finder                                $finder
+     * @param LoggerInterface                       $logger
      */
     public function __construct(
         ModuleConfigurationInstallerInterface $moduleConfigurationInstaller,
         BasicContextInterface $context,
-        Finder $finder
+        Finder $finder,
+        LoggerInterface $logger
     ) {
         $this->moduleConfigurationInstaller = $moduleConfigurationInstaller;
         $this->context = $context;
         $this->finder = $finder;
+        $this->logger = $logger;
 
         parent::__construct();
     }
@@ -76,20 +83,23 @@ class InstallAllModulesConfigurationCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        try {
-            $moduleDirectory = $this->context->getModulesPath();
-            $moduleDirectories = $this->finder->files()->name('metadata.php')->in($moduleDirectory);
+        $moduleDirectory = $this->context->getModulesPath();
+        $moduleDirectories = $this->finder->files()->name('metadata.php')->in($moduleDirectory);
 
-            foreach ($moduleDirectories->getIterator() as $directory) {
-                $output->writeln('<info>' . 'installing module' . $directory->getPath() . '</info>');
+        foreach ($moduleDirectories->getIterator() as $directory) {
+            $output->writeln('<info>' . 'Installing module ' . $directory->getPath() . '</info>');
+            try {
                 $this->moduleConfigurationInstaller->install($directory->getPath(), $directory->getPath());
+            } catch (\Throwable $throwable) {
+                $output->writeln('<error>Module directory of ' .
+                                 $directory->getPath() .
+                                 '  could not be installed due to ' . $throwable->getMessage() . '</error>');
+                $this->logger->error('Module directory of ' .
+                                     $directory->getPath() .
+                                     '  could not be installed due to ' . $throwable->getMessage(), [$throwable]);
             }
-
-            $output->writeln('<info>' . self::MESSAGE_INSTALLATION_WAS_SUCCESSFUL . '</info>');
-        } catch (\Throwable $throwable) {
-            $output->writeln('<error>' . self::MESSAGE_INSTALLATION_FAILED . '</error>');
-
-            throw $throwable;
         }
+
+        $output->writeln('<info> All module configurations have been installed. </info>');
     }
 }

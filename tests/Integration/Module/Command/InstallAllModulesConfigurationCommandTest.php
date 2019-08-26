@@ -99,9 +99,5 @@ class InstallAllModulesConfigurationCommandTest extends TestCase
         $command->setApplication($application);
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
-            '/' . InstallAllModulesConfigurationCommand::MESSAGE_INSTALLATION_WAS_SUCCESSFUL . '/',
-            $commandTester->getDisplay()
-        );
     }
 }
