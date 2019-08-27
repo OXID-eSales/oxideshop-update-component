@@ -19,7 +19,7 @@ use Symfony\Component\Finder\Finder;
  * Command to install all modules in source/modules directory.
  * @internal
  */
-class InstallAllModulesConfigurationCommand extends Command
+final class InstallAllModulesConfigurationCommand extends Command
 {
     /**
      * @var ModuleConfigurationInstallerInterface
