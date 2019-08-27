@@ -6,6 +6,7 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\Module\Command;
 
+use Monolog\Logger;
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\Dao\ModuleConfigurationDaoInterface;
@@ -92,7 +93,8 @@ class InstallAllModulesConfigurationCommandTest extends TestCase
         $application->add(new InstallAllModulesConfigurationCommand(
             $this->get(ModuleConfigurationInstallerInterface::class),
             $context,
-            $this->get(FinderFactoryInterface::class)
+            $this->get(FinderFactoryInterface::class),
+            $this->getMockBuilder(Logger::class)->setMethods(['error'])->disableOriginalConstructor()->getMock()
         ));
 
         $command = $application->find('oe:oxideshop-update-component:install-all-modules');
