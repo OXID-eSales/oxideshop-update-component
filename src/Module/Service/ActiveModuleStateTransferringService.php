@@ -7,8 +7,11 @@
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Service;
 
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\EshopCommunity\Internal\Adapter\Configuration\Dao\ShopConfigurationSettingDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Common\Exception\EntryDoesNotExistDaoException;
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\Dao\ShopConfigurationDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Configuration\DataObject\ModuleConfiguration;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @internal
@@ -20,9 +23,24 @@ class ActiveModuleStateTransferringService implements ActiveModuleStateTransferr
      */
     private $shopConfigurationDao;
 
-    public function __construct(ShopConfigurationDaoInterface $shopConfigurationDao)
-    {
+    /**
+     * @var OutputInterface
+     */
+    private $output;
+
+    /**
+     * @var ShopConfigurationSettingDaoInterface
+     */
+    private $shopConfigurationSettingDao;
+
+    public function __construct(
+        ShopConfigurationDaoInterface $shopConfigurationDao,
+        OutputInterface $output,
+        ShopConfigurationSettingDaoInterface $shopConfigurationSettingDao
+    ) {
         $this->shopConfigurationDao = $shopConfigurationDao;
+        $this->output = $output;
+        $this->shopConfigurationSettingDao = $shopConfigurationSettingDao;
     }
 
     public function transferAlreadyActiveModuleStateToProjectConfiguration(): void
@@ -32,9 +50,12 @@ class ActiveModuleStateTransferringService implements ActiveModuleStateTransferr
 
     private function setAlreadyActiveModulesToConfiguredInProjectConfiguration(): void
     {
+        $this->output->writeln('<info>Transfering modules active state</info>');
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
+            $this->output->writeln('<info>Checking active modules in the shop with id ' . $shopId . '</info>');
             foreach ($shopConfiguration->getModuleConfigurations() as $moduleConfiguration) {
-                if ($this->isActive($moduleConfiguration)) {
+                if ($this->isActive($moduleConfiguration, $shopId)) {
+                    $this->output->writeln('<info>' . $moduleConfiguration->getId() . ' module has active state</info>');
                     $moduleConfiguration->setConfigured(true);
                 }
             }
@@ -43,20 +64,20 @@ class ActiveModuleStateTransferringService implements ActiveModuleStateTransferr
         }
     }
 
-    private function isActive(ModuleConfiguration $moduleConfiguration): bool
+    private function isActive(ModuleConfiguration $moduleConfiguration, int $shopId): bool
     {
-        return !$this->isInDisabledList($moduleConfiguration->getId())
-            && (!$moduleConfiguration->hasClassExtensions() || $this->hasClassExtensionsInDatabase($moduleConfiguration));
+        return !$this->isInDisabledList($moduleConfiguration->getId(), $shopId)
+            && (!$moduleConfiguration->hasClassExtensions() || $this->hasClassExtensionsInDatabase($moduleConfiguration, $shopId));
     }
 
-    private function isInDisabledList(string $moduleId): bool
+    private function isInDisabledList(string $moduleId, int $shopId): bool
     {
-        return in_array($moduleId, (array) Registry::getConfig()->getConfigParam('aDisabledModules'));
+        return in_array($moduleId, $this->getDisabledList($shopId));
     }
 
-    private function hasClassExtensionsInDatabase(ModuleConfiguration $moduleConfiguration): bool
+    private function hasClassExtensionsInDatabase(ModuleConfiguration $moduleConfiguration, int $shopId): bool
     {
-        $chainFromDatabase = Registry::getConfig()->getModulesWithExtendedClass();
+        $chainFromDatabase = $this->getExtensionsFromDatabase($shopId);
 
         foreach ($moduleConfiguration->getClassExtensions() as $classExtension) {
             if (
@@ -71,5 +92,31 @@ class ActiveModuleStateTransferringService implements ActiveModuleStateTransferr
         }
 
         return false;
+    }
+
+    private function getDisabledList(int $shopId): array
+    {
+        try {
+            return $this
+                ->shopConfigurationSettingDao
+                ->get('aDisabledModules', $shopId)
+                ->getValue();
+        } catch (EntryDoesNotExistDaoException $exception) {
+            return [];
+        }
+    }
+
+    private function getExtensionsFromDatabase(int $shopId): array
+    {
+        try {
+            $extensions = $this
+                ->shopConfigurationSettingDao
+                ->get('aModules', $shopId)
+                ->getValue();
+
+            return Registry::getConfig()->parseModuleChains($extensions);
+        } catch (EntryDoesNotExistDaoException $exception) {
+            return [];
+        }
     }
 }
