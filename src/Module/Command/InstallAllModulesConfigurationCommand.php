@@ -6,7 +6,6 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
-use OxidEsales\EshopCommunity\Internal\Application\ContainerFactory;
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
@@ -38,7 +37,7 @@ class InstallAllModulesConfigurationCommand extends Command
     private $finder;
 
     /**
-     * @var LoggerInterface\
+     * @var LoggerInterface
      */
     private $logger;
 

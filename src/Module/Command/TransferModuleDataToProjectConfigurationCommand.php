@@ -47,7 +47,7 @@ final class TransferModuleDataToProjectConfigurationCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('oe:oxideshop-update-component:transfer-module-data' );
+        $this->setName('oe:oxideshop-update-component:transfer-module-data');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void

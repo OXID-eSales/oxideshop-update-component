@@ -50,7 +50,7 @@ class ActiveModuleStateTransferringService implements ActiveModuleStateTransferr
 
     private function setAlreadyActiveModulesToConfiguredInProjectConfiguration(): void
     {
-        $this->output->writeln('<info>Transfering modules active state</info>');
+        $this->output->writeln('<info>Transferring modules active state</info>');
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
             $this->output->writeln('<info>Checking active modules in the shop with id ' . $shopId . '</info>');
             foreach ($shopConfiguration->getModuleConfigurations() as $moduleConfiguration) {

@@ -45,7 +45,7 @@ class ModuleSettingsTransferringService implements ModuleSettingsTransferringSer
     public function transferValuesFromDatabaseToProjectConfiguration(): void
     {
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
-            $this->output->writeln('<info>Transfering module settings for the shop with id ' . $shopId . '</info>');
+            $this->output->writeln('<info>Transferring module settings for the shop with id ' . $shopId . '</info>');
             $shopConfiguration = $this->transferValuesToShopConfiguration($shopConfiguration, $shopId);
             $this->shopConfigurationDao->save($shopConfiguration, $shopId);
         }
