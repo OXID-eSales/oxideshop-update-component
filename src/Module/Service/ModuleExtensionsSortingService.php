@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-class ModuleExtensionsSortingService
+class ModuleExtensionsSortingService implements ModuleExtensionsSortingServiceInterface
 {
     /** @var ShopConfigurationSettingDaoInterface */
     private $shopConfigurationSettingDao;
