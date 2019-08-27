@@ -22,7 +22,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @internal
  */
-class InstallAllModulesConfigurationCommandTest extends TestCase
+final class InstallAllModulesConfigurationCommandTest extends TestCase
 {
     use ContainerTrait;
 

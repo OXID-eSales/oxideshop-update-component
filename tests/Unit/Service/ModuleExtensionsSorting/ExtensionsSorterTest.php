@@ -9,7 +9,7 @@ namespace OxidEsales\OxidEshopUpdateComponent\Tests\Unit\Service\ModuleExtension
 use OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSorting\ExtensionsSorter;
 use PHPUnit\Framework\TestCase;
 
-class ExtensionsSorterTest extends TestCase
+final class ExtensionsSorterTest extends TestCase
 {
     public function testSort()
     {

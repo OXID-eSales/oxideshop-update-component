@@ -20,7 +20,7 @@ use OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSortingSe
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tests\Fixtures\DummyOutput;
 
-class ModuleExtensionsSortingServiceTest extends TestCase
+final class ModuleExtensionsSortingServiceTest extends TestCase
 {
     use ContainerTrait;
 
