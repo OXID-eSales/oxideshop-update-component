@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @internal
  */
-class ModuleSettingsTransferringService implements ModuleSettingsTransferingServiceInterface
+class ModuleSettingsTransferringService implements ModuleSettingsTransferringServiceInterface
 {
     /**
      * @var ShopConfigurationDaoInterface
@@ -45,7 +45,7 @@ class ModuleSettingsTransferringService implements ModuleSettingsTransferingServ
     public function transferValuesFromDatabaseToProjectConfiguration(): void
     {
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
-            $this->output->writeln('Transfer module settings for the shop with id ' . $shopId);
+            $this->output->writeln('<info>Transfering module settings for the shop with id ' . $shopId . '</info>');
             $shopConfiguration = $this->transferValuesToShopConfiguration($shopConfiguration, $shopId);
             $this->shopConfigurationDao->save($shopConfiguration, $shopId);
         }

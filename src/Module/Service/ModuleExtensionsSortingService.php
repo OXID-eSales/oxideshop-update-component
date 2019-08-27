@@ -61,7 +61,7 @@ class ModuleExtensionsSortingService
     public function sort(): void
     {
         foreach ($this->shopConfigurationDao->getAll() as $shopId => $shopConfiguration) {
-            $this->output->writeln('Sort module extensions for the shop with id ' . $shopId);
+            $this->output->writeln('<info>Sort module extensions for the shop with id ' . $shopId . '</info>');
             try {
                 $extensionsFromDatabase = $this->shopConfigurationSettingDao->get(
                     ShopConfigurationSetting::MODULE_CLASS_EXTENSIONS_CHAIN,
