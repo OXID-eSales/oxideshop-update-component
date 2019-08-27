@@ -8,6 +8,11 @@ services:
     tags:
       - { name: 'console.command' }
 
+  OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand
+    tags:
+      - { name: 'console.command' }
+
   OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
 
