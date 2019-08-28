@@ -35,4 +35,4 @@ services:
     class: OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapter
 
   oxid_esales.oxid_eshop_update_component.symfony_console_output:
-    class: Symfony\Component\Console\Output\BufferedOutput
+    class: Symfony\Component\Console\Output\ConsoleOutput
