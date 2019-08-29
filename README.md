@@ -1,7 +1,8 @@
 OXID eShop update component
 ===========================
 
-Component for upgrading OXID eShop compilation from v6.1 to v6.2.
+This component is a helper for upgrading the OXID eShop compilation from v6.1 to v6.2. 
+[See more info on updating here.](https://docs.oxid-esales.com/developer/en/6.2/update/eshop_from_6x_to_6y/update_to_62.html)
 
 ## Installation
 
