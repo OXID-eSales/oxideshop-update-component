@@ -28,6 +28,11 @@ services:
     arguments:
       Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
 
+  OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionServiceInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionService
+    arguments:
+      Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
+
   oxid_esales.oxid_eshop_update_component.service.module_extensions_sorting.extensions_sorter:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSorting\ExtensionsSorter
 
