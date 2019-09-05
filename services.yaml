@@ -13,6 +13,11 @@ services:
     tags:
       - { name: 'console.command' }
 
+  OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand
+    tags:
+      - { name: 'console.command' }
+
   OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
     arguments:

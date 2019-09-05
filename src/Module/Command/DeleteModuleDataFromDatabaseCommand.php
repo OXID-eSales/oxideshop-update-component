@@ -6,6 +6,7 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
+use OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,13 +19,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class DeleteModuleDataFromDatabaseCommand extends Command
 {
+    /**
+     * @var ModuleDataDeletionServiceInterface
+     */
+    private $moduleDataDeletionService;
 
     /**
+     * DeleteModuleDataFromDatabaseCommand constructor.
+     * @param ModuleDataDeletionServiceInterface $moduleDataDeletionService
      */
-    public function __construct()
+    public function __construct(ModuleDataDeletionServiceInterface $moduleDataDeletionService)
     {
-        echo "ghy";
-
+        $this->moduleDataDeletionService = $moduleDataDeletionService;
         parent::__construct();
     }
 
@@ -33,13 +39,7 @@ final class DeleteModuleDataFromDatabaseCommand extends Command
      */
     protected function configure(): void
     {
-        $this
-            ->setName(
-                'oe:oxideshop-update-component:delete_module_data_from_database'
-            )
-            ->setDescription(
-                'Delete module data from the database.'
-            );
+        $this->setName('oe:oxideshop-update-component:delete-module-data-from-database');
     }
 
     /**
@@ -49,8 +49,6 @@ final class DeleteModuleDataFromDatabaseCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        // delete controllers
-        // delete aDisabledModules
-        // delete all other module related information where module =
+        $this->moduleDataDeletionService->deleteModuleDataFromDatabase();
     }
 }
