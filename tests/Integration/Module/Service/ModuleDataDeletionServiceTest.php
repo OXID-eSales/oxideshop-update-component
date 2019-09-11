@@ -10,7 +10,7 @@ use OxidEsales\Eshop\Core\DatabaseProvider;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Adapter\Configuration\Dao\ShopConfigurationSettingDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Adapter\Configuration\DataObject\ShopConfigurationSetting;
-use OxidEsales\EshopCommunity\Internal\Common\Exception\EntryDoesNotExistDaoException;
+use OxidEsales\EshopCommunity\Internal\Framework\Dao\EntryDoesNotExistDaoException;
 use OxidEsales\EshopCommunity\Tests\Integration\Internal\ContainerTrait;
 use OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionServiceInterface;
 use PHPUnit\Framework\TestCase;

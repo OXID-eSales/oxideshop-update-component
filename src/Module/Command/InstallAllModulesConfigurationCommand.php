@@ -7,8 +7,8 @@
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
-use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
-use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\FileSystem\FinderFactoryInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Install\Service\ModuleConfigurationInstallerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

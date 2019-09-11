@@ -8,9 +8,9 @@ namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\Module\Command;
 
 use Monolog\Logger;
 use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
-use OxidEsales\EshopCommunity\Internal\Common\FileSystem\FinderFactoryInterface;
-use OxidEsales\EshopCommunity\Internal\Module\Configuration\Dao\ModuleConfigurationDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Module\Install\Service\ModuleConfigurationInstallerInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\FileSystem\FinderFactoryInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Dao\ModuleConfigurationDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Install\Service\ModuleConfigurationInstallerInterface;
 use OxidEsales\EshopCommunity\Internal\Utility\ContextInterface;
 use OxidEsales\EshopCommunity\Tests\Integration\Internal\ContainerTrait;
 use OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand;
