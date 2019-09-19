@@ -7,11 +7,11 @@
 namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\Module\Command;
 
 use Monolog\Logger;
-use OxidEsales\EshopCommunity\Internal\Application\Utility\BasicContextInterface;
+use OxidEsales\EshopCommunity\Internal\Container\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Dao\ModuleConfigurationDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Install\Service\ModuleConfigurationInstallerInterface;
-use OxidEsales\EshopCommunity\Internal\Utility\ContextInterface;
+use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 use OxidEsales\EshopCommunity\Tests\Integration\Internal\ContainerTrait;
 use OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand;
 use PHPUnit\Framework\TestCase;
@@ -72,7 +72,7 @@ final class InstallAllModulesConfigurationCommandTest extends TestCase
     }
 
     /**
-     * @expectedException \OxidEsales\EshopCommunity\Internal\Adapter\Exception\ModuleConfigurationNotFoundException
+     * @expectedException \OxidEsales\EshopCommunity\Internal\Transition\Adapter\Exception\ModuleConfigurationNotFoundException
      */
     public function testInstallWithNoModules(): void
     {

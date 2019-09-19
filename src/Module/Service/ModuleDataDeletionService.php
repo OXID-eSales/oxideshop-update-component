@@ -6,13 +6,9 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Service;
 
-use OxidEsales\Eshop\Core\Registry;
-use OxidEsales\EshopCommunity\Internal\Adapter\Configuration\Dao\ShopConfigurationSettingDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Adapter\Configuration\DataObject\ShopConfigurationSetting;
-use OxidEsales\EshopCommunity\Internal\Framework\Dao\EntryDoesNotExistDaoException;
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Dao\ShopConfigurationDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Setting\SettingDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Utility\ContextInterface;
+use OxidEsales\EshopCommunity\Internal\Transition\Adapter\Configuration\Dao\ShopConfigurationSettingDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Transition\Adapter\Configuration\DataObject\ShopConfigurationSetting;
+use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
