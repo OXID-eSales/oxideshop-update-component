@@ -6,7 +6,7 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Command;
 
-use OxidEsales\EshopCommunity\Internal\Container\Utility\BasicContextInterface;
+use OxidEsales\EshopCommunity\Internal\Transition\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\FileSystem\FinderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Install\Service\ModuleConfigurationInstallerInterface;
 use Psr\Log\LoggerInterface;
