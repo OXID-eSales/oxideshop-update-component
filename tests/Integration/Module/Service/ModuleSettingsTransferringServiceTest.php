@@ -27,6 +27,7 @@ final class ModuleSettingsTransferringServiceTest extends TestCase
         $moduleSettingsTransferringService = $this->get(ModuleSettingsTransferringServiceInterface::class);
         $moduleSettingsTransferringService->transferValuesFromDatabaseToProjectConfiguration();
 
+        /** @var ShopConfigurationDaoInterface $shopConfigurationDao */
         $shopConfigurationDao = $this->get(ShopConfigurationDaoInterface::class);
 
         $this->assertSame(
@@ -54,21 +55,17 @@ final class ModuleSettingsTransferringServiceTest extends TestCase
         $setting1
             ->setName('settingFromDatabase')
             ->setType('bool')
-            ->setValue(true)
-            ->setShopId(1)
-            ->setModuleId('first');
+            ->setValue(true);
 
         $setting2 = new Setting();
         $setting2
             ->setName('settingFromDatabase')
             ->setType('str')
-            ->setValue('valueFromDatabase')
-            ->setShopId(2)
-            ->setModuleId('second');
+            ->setValue('valueFromDatabase');
 
         $dao = $this->get(SettingDaoInterface::class);
-        $dao->save($setting1);
-        $dao->save($setting2);
+        $dao->save($setting1, 'first', 1);
+        $dao->save($setting2, 'second', 2);
     }
 
     private function prepareTestProjectConfiguration(): void
