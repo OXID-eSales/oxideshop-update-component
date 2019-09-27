@@ -6,8 +6,8 @@
 
 namespace OxidEsales\OxidEshopUpdateComponent\Module\Service;
 
-use OxidEsales\EshopCommunity\Internal\Transition\Adapter\Configuration\Dao\ShopConfigurationSettingDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Transition\Adapter\Configuration\DataObject\ShopConfigurationSetting;
+use OxidEsales\EshopCommunity\Internal\Framework\Config\Dao\ShopConfigurationSettingDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Config\DataObject\ShopConfigurationSetting;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
