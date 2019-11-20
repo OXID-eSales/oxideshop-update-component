@@ -3,46 +3,10 @@ services:
     autowire: true
     public: false
 
-  oxid_esales.oxid_eshop_update_component.command.install_all_modules_configuration_command:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand
+  oxid_esales.oxid_eshop_update_component.command.decoder_command:
+    class: OxidEsales\OxidEshopUpdateComponent\ConfigDecoder\Command\DecoderCommand
     tags:
       - { name: 'console.command' }
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand
-    tags:
-      - { name: 'console.command' }
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand
-    tags:
-      - { name: 'console.command' }
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
-    arguments:
-      Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringServiceInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ActiveModuleStateTransferringService
-    arguments:
-      Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSortingServiceInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSortingService
-    arguments:
-      Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
-
-  OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionServiceInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleDataDeletionService
-    arguments:
-      Symfony\Component\Console\Output\OutputInterface: '@oxid_esales.oxid_eshop_update_component.symfony_console_output'
-
-  oxid_esales.oxid_eshop_update_component.service.module_extensions_sorting.extensions_sorter:
-    class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleExtensionsSorting\ExtensionsSorter
-
-  oxid_esales.oxid_eshop_update_component.adapter.shop_adapter:
-    class: OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapter
 
   oxid_esales.oxid_eshop_update_component.symfony_console_output:
     class: Symfony\Component\Console\Output\ConsoleOutput
