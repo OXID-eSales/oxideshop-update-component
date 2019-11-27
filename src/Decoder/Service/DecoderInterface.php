@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace OxidEsales\OxidEshopUpdateComponent\ConfigDecoder\Service;
+namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Service;
 
 /**
  * @internal
