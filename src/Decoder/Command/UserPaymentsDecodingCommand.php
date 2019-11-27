@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @internal
  */
-final class ConfigurationDecodingCommand extends Command
+final class UserPaymentsDecodingCommand extends Command
 {
     use DecodingConfirmationQuestionProvider;
 
@@ -27,9 +27,8 @@ final class ConfigurationDecodingCommand extends Command
      */
     private $decoder;
 
-    public function __construct(
-        DecoderInterface $decoder
-    ) {
+    public function __construct(DecoderInterface $decoder)
+    {
         parent::__construct();
         $this->decoder = $decoder;
     }
@@ -39,7 +38,7 @@ final class ConfigurationDecodingCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('oe:oxideshop-update-component:decode-config-values');
+        $this->setName('oe:oxideshop-update-component:decode-user-payment-values');
     }
 
     /**
