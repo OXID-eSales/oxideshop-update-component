@@ -36,7 +36,10 @@ final class ConfigurationDecodingCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('oe:oxideshop-update-component:decode-config-values');
+        $this->setName('oe:oxideshop-update-component:decode-config-values')
+            ->setDescription(
+                'Decodes all of the values in oxconfig table.'
+            );
     }
 
     /**

@@ -35,7 +35,10 @@ final class UserPaymentsDecodingCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('oe:oxideshop-update-component:decode-user-payment-values');
+        $this->setName('oe:oxideshop-update-component:decode-user-payment-values')
+            ->setDescription(
+                'Decodes all the of values in oxuserpayments table.'
+            );
     }
 
     /**
