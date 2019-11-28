@@ -16,9 +16,6 @@ use OxidEsales\EshopCommunity\Tests\Integration\Internal\ContainerTrait;
 use OxidEsales\TestingLibrary\Services\Library\DatabaseRestorer\DatabaseRestorer;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- */
 final class ConfigurationDecoderTest extends TestCase
 {
     use ContainerTrait;

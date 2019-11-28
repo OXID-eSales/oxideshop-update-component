@@ -13,9 +13,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-/**
- * @internal
- */
 trait DecodingConfirmationQuestionProvider
 {
     protected function userConfirmation(InputInterface $input, OutputInterface $output): bool

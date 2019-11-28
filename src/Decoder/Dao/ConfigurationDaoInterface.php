@@ -9,9 +9,6 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Dao;
 
-/**
- * @internal
- */
 interface ConfigurationDaoInterface
 {
     public function decodeValues(): void;

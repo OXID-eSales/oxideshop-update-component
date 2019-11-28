@@ -11,9 +11,6 @@ namespace OxidEsales\OxidEshopUpdateComponent\Adapter;
 
 use OxidEsales\Eshop\Application\Model\UserPayment;
 
-/**
- * @internal
- */
 class ShopAdapter implements ShopAdapterInterface
 {
     public function getPaymentKey(): string

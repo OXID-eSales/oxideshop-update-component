@@ -11,9 +11,6 @@ namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Service;
 
 use OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\ConfigurationDaoInterface;
 
-/**
- * @internal
- */
 class ConfigurationDecoder implements DecoderInterface
 {
     /**

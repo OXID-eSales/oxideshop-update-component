@@ -9,9 +9,6 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Service;
 
-/**
- * @internal
- */
 interface DecoderInterface
 {
     public function decode();

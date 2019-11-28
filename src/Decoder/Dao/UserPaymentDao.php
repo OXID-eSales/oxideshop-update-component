@@ -13,9 +13,6 @@ use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInt
 use OxidEsales\EshopCommunity\Internal\Framework\Database\TransactionServiceInterface;
 use OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapterInterface;
 
-/**
- * @internal
- */
 class UserPaymentDao implements UserPaymentDaoInterface
 {
     /**
