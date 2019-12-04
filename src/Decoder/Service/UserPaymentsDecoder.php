@@ -9,23 +9,23 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Service;
 
-use OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\UserPaymentDaoInterface;
+use OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\UserPaymentInterface;
 
 class UserPaymentsDecoder implements DecoderInterface
 {
     /**
-     * @var UserPaymentDaoInterface
+     * @var UserPaymentInterface
      */
-    private $userPaymentDao;
+    private $userPaymentMigration;
 
     public function __construct(
-        UserPaymentDaoInterface $userPaymentDao
+        UserPaymentInterface $userPaymentMigration
     ) {
-        $this->userPaymentDao = $userPaymentDao;
+        $this->userPaymentMigration = $userPaymentMigration;
     }
 
     public function decode(): void
     {
-        $this->userPaymentDao->decodeValues();
+        $this->userPaymentMigration->migrate();
     }
 }

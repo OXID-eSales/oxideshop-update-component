@@ -7,9 +7,10 @@
 
 declare(strict_types=1);
 
-namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Dao;
+namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Exception;
 
-interface ConfigurationDaoInterface
+use Exception;
+
+class WrongColumnType extends Exception
 {
-    public function decodeValues(): void;
 }

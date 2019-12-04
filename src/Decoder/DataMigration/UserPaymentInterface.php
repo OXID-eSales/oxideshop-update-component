@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Dao;
+namespace OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration;
 
-interface UserPaymentDaoInterface
+interface UserPaymentInterface
 {
-    public function decodeValues(): void;
+    public function migrate(): void;
 }

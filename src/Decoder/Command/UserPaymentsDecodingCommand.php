@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Command;
 
+use OxidEsales\OxidEshopUpdateComponent\Decoder\Exception\WrongColumnType;
 use OxidEsales\OxidEshopUpdateComponent\Decoder\Service\DecoderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,7 +38,7 @@ final class UserPaymentsDecodingCommand extends Command
     {
         $this->setName('oe:oxideshop-update-component:decode-user-payment-values')
             ->setDescription(
-                'Decodes all the of values in oxuserpayments table.'
+                'Decodes all the of values in oxuserpayments table and converts column to text type.'
             );
     }
 
@@ -48,8 +49,13 @@ final class UserPaymentsDecodingCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         if ($this->userConfirmation($input, $output)) {
-            $this->decoder->decode();
-            (new SymfonyStyle($input, $output))->success('Values were decoded successfully!');
+            $outputStyled = (new SymfonyStyle($input, $output));
+            try {
+                $this->decoder->decode();
+                $outputStyled->success('Values were decoded successfully!');
+            } catch (WrongColumnType $exception) {
+                $outputStyled->error($exception->getMessage());
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ services:
   oxid_esales.oxid_eshop_update_component.configuration_decoder:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\ConfigurationDecoder
 
-  OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\ConfigurationDaoInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\ConfigurationDao
+  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\ConfigurationInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\Configuration
 
   oxid_esales.oxid_eshop_update_component.command.user_payment_decoding_command:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Command\UserPaymentsDecodingCommand
@@ -26,8 +26,11 @@ services:
   oxid_esales.oxid_eshop_update_component.user_payments_decoder:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\UserPaymentsDecoder
 
-  OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\UserPaymentDaoInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\UserPaymentDao
+  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\UserPaymentInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\UserPayment
+
+  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\ValidatorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\Validator
 
   oxid_esales.oxid_eshop_update_component.symfony_console_output:
     class: Symfony\Component\Console\Output\ConsoleOutput

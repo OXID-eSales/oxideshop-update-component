@@ -9,23 +9,23 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\Service;
 
-use OxidEsales\OxidEshopUpdateComponent\Decoder\Dao\ConfigurationDaoInterface;
+use OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\ConfigurationInterface;
 
 class ConfigurationDecoder implements DecoderInterface
 {
     /**
-     * @var ConfigurationDaoInterface
+     * @var ConfigurationInterface
      */
-    private $configurationDao;
+    private $configurationMigration;
 
     public function __construct(
-        ConfigurationDaoInterface $configurationDao
+        ConfigurationInterface $configurationMigration
     ) {
-        $this->configurationDao = $configurationDao;
+        $this->configurationMigration = $configurationMigration;
     }
 
     public function decode(): void
     {
-        $this->configurationDao->decodeValues();
+        $this->configurationMigration->migrate();
     }
 }
