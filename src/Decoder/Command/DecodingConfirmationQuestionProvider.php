@@ -19,7 +19,7 @@ trait DecodingConfirmationQuestionProvider
     {
         $question = new ConfirmationQuestion(
             '<question>All of the config table values will be decoded without possibility to revert.'
-            . PHP_EOL . 'We recommend before running this command to make database backup'
+            . PHP_EOL . 'We recommend before running this command to make database backup.'
             . PHP_EOL . 'Do you still want to proceed?</question> (y/N)',
             false
         );
