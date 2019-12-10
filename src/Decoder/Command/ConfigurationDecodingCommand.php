@@ -37,14 +37,13 @@ final class ConfigurationDecodingCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('oe:oxideshop-update-component:decode-config-values')
-            ->setDescription(
-                'Decodes all of the values in oxconfig table and converts column to text type.'
-            );
+        $this->setDescription(
+            'Decodes all of the values in oxconfig table and converts column to text type.'
+        );
     }
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output): void

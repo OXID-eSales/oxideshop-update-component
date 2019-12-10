@@ -8,7 +8,7 @@ services:
     arguments:
       - '@oxid_esales.oxid_eshop_update_component.configuration_decoder'
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'oe:oxideshop-update-component:decode-config-values' }
 
   oxid_esales.oxid_eshop_update_component.configuration_decoder:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\ConfigurationDecoder
@@ -21,7 +21,7 @@ services:
     arguments:
       - '@oxid_esales.oxid_eshop_update_component.user_payments_decoder'
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'oe:oxideshop-update-component:decode-user-payment-values' }
 
   oxid_esales.oxid_eshop_update_component.user_payments_decoder:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\UserPaymentsDecoder
