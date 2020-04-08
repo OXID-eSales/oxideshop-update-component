@@ -67,9 +67,6 @@ final class InstallAllModulesConfigurationCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName(
-                'oe:oxideshop-update-component:install-all-modules'
-            )
             ->setDescription(
                 'Install all modules that inside source/modules directory'
             );

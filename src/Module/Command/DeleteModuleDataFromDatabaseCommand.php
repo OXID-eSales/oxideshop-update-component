@@ -35,14 +35,6 @@ final class DeleteModuleDataFromDatabaseCommand extends Command
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function configure(): void
-    {
-        $this->setName('oe:oxideshop-update-component:delete-module-data-from-database');
-    }
-
-    /**
      * @param InputInterface  $input
      * @param OutputInterface $output
      *

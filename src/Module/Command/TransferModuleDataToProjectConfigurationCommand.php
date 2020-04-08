@@ -45,11 +45,6 @@ final class TransferModuleDataToProjectConfigurationCommand extends Command
         parent::__construct();
     }
 
-    protected function configure(): void
-    {
-        $this->setName('oe:oxideshop-update-component:transfer-module-data');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $this->activeModuleStateTransferringService->transferAlreadyActiveModuleStateToProjectConfiguration();
