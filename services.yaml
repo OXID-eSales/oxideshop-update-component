@@ -6,17 +6,17 @@ services:
   oxid_esales.oxid_eshop_update_component.command.install_all_modules_configuration_command:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Command\InstallAllModulesConfigurationCommand
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'oe:oxideshop-update-component:install-all-modules' }
 
   OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Command\TransferModuleDataToProjectConfigurationCommand
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'oe:oxideshop-update-component:transfer-module-data' }
 
   OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Command\DeleteModuleDataFromDatabaseCommand
     tags:
-      - { name: 'console.command' }
+      - { name: 'console.command', command: 'oe:oxideshop-update-component:delete-module-data-from-database' }
 
   OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringServiceInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Service\ModuleSettingsTransferringService
