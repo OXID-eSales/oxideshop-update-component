@@ -90,14 +90,18 @@ final class InstallAllModulesConfigurationCommandTest extends TestCase
         $context = $this->getMockBuilder(BasicContextInterface::class)->getMock();
         $context->method('getModulesPath')->willReturn($modulesPath);
         $application = new Application();
-        $application->add(new InstallAllModulesConfigurationCommand(
+
+        $command = new InstallAllModulesConfigurationCommand(
             $this->get(ModuleConfigurationInstallerInterface::class),
             $context,
             $this->get(FinderFactoryInterface::class),
             $this->getMockBuilder(Logger::class)->setMethods(['error'])->disableOriginalConstructor()->getMock()
-        ));
+        );
+        $command->setName('oe:oxideshop-update-component:install-all-modules');
 
-        $command = $application->find('oe:oxideshop-update-component:install-all-modules');
+        $application->add($command);
+
+        $command = $application->find($command->getName());
         $command->setApplication($application);
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName()]);
