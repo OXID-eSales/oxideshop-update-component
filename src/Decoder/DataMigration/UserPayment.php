@@ -9,9 +9,8 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration;
 
-use Doctrine\DBAL\Connection;
+use OxidEsales\EshopCommunity\Internal\Framework\Database\ConnectionProviderInterface;
 use OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapterInterface;
-use OxidEsales\OxidEshopUpdateComponent\Decoder\Exception\WrongColumnType;
 
 class UserPayment implements UserPaymentInterface
 {
@@ -21,9 +20,10 @@ class UserPayment implements UserPaymentInterface
     private $shopAdapter;
 
     /**
-     * @var Connection
+     * @var ConnectionProviderInterface
      */
-    private $connection;
+    private $connectionProvider;
+
     /**
      * @var ValidatorInterface
      */
@@ -31,11 +31,11 @@ class UserPayment implements UserPaymentInterface
 
     public function __construct(
         ShopAdapterInterface $shopAdapter,
-        Connection $connection,
+        ConnectionProviderInterface $connectionProvider,
         ValidatorInterface $validator
     ) {
         $this->shopAdapter = $shopAdapter;
-        $this->connection = $connection;
+        $this->connectionProvider = $connectionProvider;
         $this->validator = $validator;
     }
 
@@ -44,17 +44,20 @@ class UserPayment implements UserPaymentInterface
         $this->validator->validateIfAlreadyMigrated('oxuserpayments', 'OXVALUE');
 
         $paymentKey = $this->shopAdapter->getPaymentKey();
-        $this->connection->executeQuery('ALTER TABLE oxuserpayments ADD COLUMN OXVALUE_TEXT TEXT NOT NULL');
-        $this->connection->executeQuery(
+
+        $connection = $this->connectionProvider->get();
+        
+        $connection->executeQuery('ALTER TABLE oxuserpayments ADD COLUMN OXVALUE_TEXT TEXT NOT NULL');
+        $connection->executeQuery(
             'UPDATE oxuserpayments SET OXVALUE_TEXT = CONVERT(DECODE(OXVALUE, ?), CHAR)',
             [
                 $paymentKey
             ]
         );
-        $this->connection->executeQuery(
+        $connection->executeQuery(
             'ALTER TABLE oxuserpayments DROP COLUMN OXVALUE'
         );
-        $this->connection->executeQuery(
+        $connection->executeQuery(
             'ALTER TABLE oxuserpayments '
             . 'CHANGE COLUMN OXVALUE_TEXT OXVALUE text NOT NULL COMMENT \'DYN payment values array as string\' '
             . 'AFTER OXPAYMENTSID'
