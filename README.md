@@ -9,7 +9,7 @@ This component is a helper for upgrading the OXID eShop compilation from v6.1 to
 Run the following command to install the component:
 
 ```bash
-composer require oxid-esales/oxideshop-update-component
+composer require --no-interaction oxid-esales/oxideshop-update-component:"^1.0"
 ```
 
 ## Usage
