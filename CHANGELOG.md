@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - functionality for upgrading the OXID eShop compilation from v6.1 to v6.2
 
+### Changed
+- Switch to using `Internal\Framework\Database\ConnectionProvider` instead of `Doctrine\DBAL\Connection`
+
 ## [v1.0.0] - 2019-11-11
 
 ### Added
