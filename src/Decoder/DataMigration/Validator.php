@@ -9,19 +9,16 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Database\ConnectionProviderInterface;
+use Doctrine\DBAL\Connection;
 use OxidEsales\OxidEshopUpdateComponent\Decoder\Exception\WrongColumnType;
 
 class Validator implements ValidatorInterface
 {
-    /**
-     * @var ConnectionProviderInterface
-     */
-    private $connectionProvider;
+    private $connection;
 
-    public function __construct(ConnectionProviderInterface $connectionProvider)
+    public function __construct(Connection $connection)
     {
-        $this->connectionProvider = $connectionProvider;
+        $this->connection = $connection;
     }
 
     /**
@@ -31,7 +28,7 @@ class Validator implements ValidatorInterface
      */
     public function validateIfAlreadyMigrated(string $table, string $column): void
     {
-        $connection = $this->connectionProvider->get();
+        $connection = $this->connection;
         $columnType = $connection
             ->fetchColumn(
                 'SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS '

@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Database\ConnectionProviderInterface;
+use Doctrine\DBAL\Connection;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 
 class Configuration implements ConfigurationInterface
@@ -20,9 +20,9 @@ class Configuration implements ConfigurationInterface
     private $context;
 
     /**
-     * @var ConnectionProviderInterface
+     * @var Connection
      */
-    private $connectionProvider;
+    private $connection;
 
     /**
      * @var ValidatorInterface
@@ -30,12 +30,12 @@ class Configuration implements ConfigurationInterface
     private $validator;
 
     public function __construct(
-        ContextInterface $context,
-        ConnectionProviderInterface $connectionProvider,
+        ContextInterface   $context,
+        Connection         $connection,
         ValidatorInterface $validator
     ) {
         $this->context = $context;
-        $this->connectionProvider = $connectionProvider;
+        $this->connection = $connection;
         $this->validator = $validator;
     }
 
@@ -43,19 +43,17 @@ class Configuration implements ConfigurationInterface
     {
         $this->validator->validateIfAlreadyMigrated('oxconfig', 'OXVARVALUE_TEXT');
 
-        $connection = $this->connectionProvider->get();
-
-        $connection->executeQuery('ALTER TABLE oxconfig ADD COLUMN OXVARVALUE_TEXT TEXT NOT NULL');
-        $connection->executeQuery(
+        $this->connection->executeQuery('ALTER TABLE oxconfig ADD COLUMN OXVARVALUE_TEXT TEXT NOT NULL');
+        $this->connection->executeQuery(
             'UPDATE oxconfig SET OXVARVALUE_TEXT = CONVERT(DECODE(oxvarvalue, ?), CHAR)',
             [
                 $this->context->getConfigurationEncryptionKey()
             ]
         );
-        $connection->executeQuery(
+        $this->connection->executeQuery(
             'ALTER TABLE oxconfig DROP COLUMN OXVARVALUE'
         );
-        $connection->executeQuery(
+        $this->connection->executeQuery(
             'ALTER TABLE oxconfig CHANGE '
             . 'COLUMN OXVARVALUE_TEXT OXVARVALUE text NOT NULL COMMENT \'Variable value\' AFTER OXVARTYPE'
         );

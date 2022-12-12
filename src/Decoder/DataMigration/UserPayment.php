@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Database\ConnectionProviderInterface;
+use Doctrine\DBAL\Connection;
 use OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapterInterface;
 
 class UserPayment implements UserPaymentInterface
@@ -19,10 +19,7 @@ class UserPayment implements UserPaymentInterface
      */
     private $shopAdapter;
 
-    /**
-     * @var ConnectionProviderInterface
-     */
-    private $connectionProvider;
+    private $connection;
 
     /**
      * @var ValidatorInterface
@@ -31,11 +28,11 @@ class UserPayment implements UserPaymentInterface
 
     public function __construct(
         ShopAdapterInterface $shopAdapter,
-        ConnectionProviderInterface $connectionProvider,
-        ValidatorInterface $validator
+        Connection           $connection,
+        ValidatorInterface   $validator
     ) {
         $this->shopAdapter = $shopAdapter;
-        $this->connectionProvider = $connectionProvider;
+        $this->connection = $connection;
         $this->validator = $validator;
     }
 
@@ -45,7 +42,7 @@ class UserPayment implements UserPaymentInterface
 
         $paymentKey = $this->shopAdapter->getPaymentKey();
 
-        $connection = $this->connectionProvider->get();
+        $connection = $this->connection;
         
         $connection->executeQuery('ALTER TABLE oxuserpayments ADD COLUMN OXVALUE_TEXT TEXT NOT NULL');
         $connection->executeQuery(
