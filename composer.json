@@ -1,16 +1,16 @@
 {
   "name": "oxid-esales/oxideshop-update-component",
   "description": "Component used to upgrade shop through minor/major versions.",
-  "homepage": "https://www.oxid-esales.com",
   "license": [
-    "GPL-3.0-only"
+    "proprietary"
   ],
   "type": "oxideshop-component",
+  "homepage": "https://www.oxid-esales.com",
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.4"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.5"
+    "phpunit/phpunit": "^8.5.14"
   },
   "autoload": {
     "psr-4": {

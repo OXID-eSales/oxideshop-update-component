@@ -1,7 +1,6 @@
 services:
   _defaults:
     autowire: true
-    public: false
 
   oxid_esales.oxid_eshop_update_component.command.configuration_decoding_command:
     class: OxidEsales\OxidEshopUpdateComponent\Decoder\Command\ConfigurationDecodingCommand
