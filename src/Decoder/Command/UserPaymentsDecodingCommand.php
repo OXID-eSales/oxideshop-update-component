@@ -53,6 +53,7 @@ final class UserPaymentsDecodingCommand extends Command
                 $outputStyled->success('Values were decoded successfully!');
             } catch (WrongColumnType $exception) {
                 $outputStyled->error($exception->getMessage());
+                return 1;
             }
         }
 
