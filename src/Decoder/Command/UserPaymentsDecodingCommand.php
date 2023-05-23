@@ -45,7 +45,7 @@ final class UserPaymentsDecodingCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($this->userConfirmation($input, $output)) {
             $outputStyled = (new SymfonyStyle($input, $output));
@@ -56,5 +56,7 @@ final class UserPaymentsDecodingCommand extends Command
                 $outputStyled->error($exception->getMessage());
             }
         }
+
+        return 0;
     }
 }
