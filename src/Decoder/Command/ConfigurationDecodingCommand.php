@@ -14,16 +14,15 @@ use OxidEsales\OxidEshopUpdateComponent\Decoder\Service\DecoderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class ConfigurationDecodingCommand extends Command
 {
-    use DecodingConfirmationQuestionProvider;
-
     /**
      * @var DecoderInterface
      */
-    private $decoder;
+    private DecoderInterface $decoder;
 
     public function __construct(
         DecoderInterface $decoder
@@ -59,5 +58,23 @@ final class ConfigurationDecodingCommand extends Command
         }
 
         return 0;
+    }
+
+    private function userConfirmation(InputInterface $input, OutputInterface $output): bool
+    {
+        $question = new ConfirmationQuestion(
+            '<question>The column oxvarvalue of the table oxconfig will be decoded without the possibility to revert.'
+            . PHP_EOL . 'We recommend to create a database backup before running this command.'
+            . PHP_EOL . 'Do you still want to proceed?</question> (y/N)',
+            false
+        );
+        $helper = $this->getHelper('question');
+
+        if (!$helper->ask($input, $output, $question)) {
+            $output->writeln('<info>Command halted. Nothing has been done.</info>');
+            return false;
+        }
+
+        return true;
     }
 }
