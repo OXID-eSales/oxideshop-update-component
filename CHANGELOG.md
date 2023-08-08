@@ -1,10 +1,6 @@
 # Change Log for OXID eShop update component
 
-All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
-
-## [v2.0.0] - 2023-05-15
+## v2.0.0 - 2023-05-15
 
 ### Added
 
@@ -15,9 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - functionality for upgrading the OXID eShop compilation from v6.1 to v6.2
 
 ### Changed
-- Switch to using `Internal\Framework\Database\ConnectionProvider` instead of `Doctrine\DBAL\Connection`
+- Switch to using `ConnectionProvider` from Internal namespace instead of the Doctrine `Connection`
 
-## [v1.0.0] - 2019-11-11
+## v1.0.0 - 2019-11-11
 
 ### Added
 
