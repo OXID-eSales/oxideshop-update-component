@@ -14,12 +14,12 @@
   },
   "autoload": {
     "psr-4": {
-      "OxidEsales\\OxidEshopUpdateComponent\\": "./src"
+      "OxidEsales\\OxidEshopUpdateComponent\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "OxidEsales\\OxidEshopUpdateComponent\\Tests\\": "./tests"
+      "OxidEsales\\OxidEshopUpdateComponent\\Tests\\": "tests"
     }
   }
 }

@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Copyright © OXID eSales AG. All rights reserved.
+ * See LICENSE file for license details.
+ */
+
+declare(strict_types=1);
+
+use OxidEsales\OxidEshopUpdateComponent\Rector\MethodCallRename\UndescoredMethodsRenamer;
+use Rector\Config\RectorConfig;
+use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
+
+/**
+ * rector.php for updating renamed deprecated underscored methods' usages in OxidEsales modules, e.g.:
+ * protected function _executeAction($sAction) => protected function executeAction($sAction)
+ * tested with rector/rector v0.18.5
+ */
+return static function (RectorConfig $rectorConfig): void {
+
+    $modulePath = __DIR__ . '/vendor/MODULE_VENDOR_PATH/';
+
+    /**
+     * Associate module's parent class with an alias, e.g.
+     * Module\Namespace\Order_parent - alias for Shop\Namespace\Order
+     * using $aModule['extend'] array from metadata.php
+     */
+    include "$modulePath/metadata.php";
+    foreach ($aModule['extend'] as $shopClass => $moduleClass) {
+        if (!class_exists("{$moduleClass}_parent")) {
+            class_alias($shopClass, "{$moduleClass}_parent");
+        }
+    }
+
+    $rectorConfig->paths([$modulePath]);
+    $rectorConfig->skip([
+        "$modulePath/assets",
+        "$modulePath/migration",
+        "$modulePath/Tests",
+        "$modulePath/translations",
+        "$modulePath/views",
+    ]);
+    $rectorConfig->ruleWithConfiguration(
+        RenameMethodRector::class,
+        (new UndescoredMethodsRenamer())
+            ->getMethodCallRenamesForModule($modulePath),
+    );
+};
