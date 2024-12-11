@@ -7,10 +7,17 @@
   "type": "oxideshop-component",
   "homepage": "https://www.oxid-esales.com",
   "require": {
-    "php": ">=7.4"
+    "php": "^8.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5.14"
+    "phpunit/phpunit": "^11.4"
+  },
+  "extra": {
+    "oxideshop": {
+      "target-directory": "oxideshop-update-component",
+      "source-directory": "src",
+      "services-yaml": "services.yaml"
+    }
   },
   "autoload": {
     "psr-4": {
