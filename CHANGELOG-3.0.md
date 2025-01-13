@@ -5,6 +5,7 @@
 ### Added
 
 - Functionality for upgrading the OXID eShop compilation from v7.x to the next major version
+- Console command to replace usages of the removed `date_format` filter in Twig templates
 
 ### Removed
 

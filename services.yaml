@@ -17,6 +17,11 @@ services:
     tags:
       - { name: 'console.command', command: 'oe:update:update-module' }
 
+  oxid_esales.oxid_eshop_update_component.command.update_template_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\TemplateUpdateCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:update-templates' }
+
   OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider:
     class: OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider
 
@@ -46,3 +51,11 @@ services:
 
   OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactoryInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactory
+
+  OxidEsales\OxidEshopUpdateComponent\Template\Migration\TemplateFilterMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Template\Migration\TemplateFilterMigrator
+
+  OxidEsales\OxidEshopUpdateComponent\Template\FileReader\FileReader:
+
+  OxidEsales\OxidEshopUpdateComponent\Template\Transformer\TwigFilterTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Template\Transformer\TwigDateFilterTransformer

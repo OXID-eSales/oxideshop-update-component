@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<p>Current date and time: {{ "now"| date('Y-m-d H:i:s') }}</p>
+
+<p>Day of the week: {{ "now"| date('l') }}</p>
+
+<p>Month name: {{ "now"| date('F') }}</p>
+
+<p>Full date: {{ "2025-01-13"| date('l, F j, Y') }}</p>
+
+<p>Short date: {{ "2025-01-13"| date('m/d/Y') }}</p>
+
+<p>Time (24-hour format): {{ "2025-01-13 14:30"| date('H:i') }}</p>
+
+</body>
+</html>
