@@ -1,0 +1,28 @@
+services:
+  _defaults:
+    autowire: true
+
+  oxid_esales.oxid_eshop_update_component.command.migrate_config_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateConfigCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:config-file' }
+
+  oxid_esales.oxid_eshop_update_component.command.refactor_module_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\RefactorModuleCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:refactor-module' }
+
+  oxid_esales.oxid_eshop_update_component.command.update_module_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\UpdateModuleCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:update-module' }
+
+  oxid_esales.oxid_eshop_update_component.command.update_template_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\TemplateUpdateCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:update-templates' }
+
+  oxid_esales.oxid_eshop_update_component.command.database_config_migration_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\DatabaseConfigurationMigrationCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:database-config' }

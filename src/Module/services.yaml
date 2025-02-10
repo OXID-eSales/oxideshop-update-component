@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Update\ModuleUpdaterInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Update\ModuleUpdater
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Validator\ModuleValidatorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Validator\ModuleValidator
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Process\ProcessRunnerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Process\ProcessRunner
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactoryInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactory

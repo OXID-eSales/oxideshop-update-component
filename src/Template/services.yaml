@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\Template\Migration\TemplateFilterMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Template\Migration\TemplateFilterMigrator
+
+  OxidEsales\OxidEshopUpdateComponent\Template\FileReader\FileReader:
+
+  OxidEsales\OxidEshopUpdateComponent\Template\Transformer\TwigFilterTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Template\Transformer\TwigDateFilterTransformer

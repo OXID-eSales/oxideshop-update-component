@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Fetcher\DatabaseConfigurationFetcherInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Fetcher\DatabaseConfigurationFetcher
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseMigrationFactory:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseMigrationFactory
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseToContainerConfigurationMigrator:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseToContainerConfigurationMigrator
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseToContainerConfigurationMigratorWithCleanup:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\Migrator\DatabaseToContainerConfigurationMigratorWithCleanup
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\ParametersProvider\ConfigurationParametersProviderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseConfig\ParametersProvider\ConfigurationParametersProvider

@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider
+
+  OxidEsales\OxidEshopUpdateComponent\Config\Migration\ConfigurationMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Migration\ConfigurationMigrator
+
+  OxidEsales\OxidEshopUpdateComponent\Config\Reader\ConfigurationReaderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Reader\ConfigurationReader
+
+  OxidEsales\OxidEshopUpdateComponent\Config\Writer\ConfigurationWriterInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Writer\ConfigurationWriter
+
+  OxidEsales\OxidEshopUpdateComponent\Config\Transformer\ConfigurationTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Transformer\ConfigurationTransformer
+
+  OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidatorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidator
