@@ -2,37 +2,25 @@ services:
   _defaults:
     autowire: true
 
-  oxid_esales.oxid_eshop_update_component.command.configuration_decoding_command:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Command\ConfigurationDecodingCommand
-    arguments:
-      - '@oxid_esales.oxid_eshop_update_component.configuration_decoder'
+  oxid_esales.oxid_eshop_update_component.command.migrate_config_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateConfigCommand
     tags:
-      - { name: 'console.command', command: 'oe:oxideshop-update-component:decode-config-values' }
+      - { name: 'console.command', command: 'oe:update:migrate-config' }
 
-  oxid_esales.oxid_eshop_update_component.configuration_decoder:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\ConfigurationDecoder
+  OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider
 
-  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\ConfigurationInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\Configuration
+  OxidEsales\OxidEshopUpdateComponent\Config\Migration\ConfigurationMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Migration\ConfigurationMigrator
 
-  oxid_esales.oxid_eshop_update_component.command.user_payment_decoding_command:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Command\UserPaymentsDecodingCommand
-    arguments:
-      - '@oxid_esales.oxid_eshop_update_component.user_payments_decoder'
-    tags:
-      - { name: 'console.command', command: 'oe:oxideshop-update-component:decode-user-payment-values' }
+  OxidEsales\OxidEshopUpdateComponent\Config\Reader\ConfigurationReaderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Reader\ConfigurationReader
 
-  oxid_esales.oxid_eshop_update_component.user_payments_decoder:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\Service\UserPaymentsDecoder
+  OxidEsales\OxidEshopUpdateComponent\Config\Writer\ConfigurationWriterInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Writer\ConfigurationWriter
 
-  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\UserPaymentInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\UserPayment
+  OxidEsales\OxidEshopUpdateComponent\Config\Transformer\ConfigurationTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Transformer\ConfigurationTransformer
 
-  OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\ValidatorInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Decoder\DataMigration\Validator
-
-  oxid_esales.oxid_eshop_update_component.symfony_console_output:
-    class: Symfony\Component\Console\Output\ConsoleOutput
-
-  OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapterInterface:
-    class: OxidEsales\OxidEshopUpdateComponent\Adapter\ShopAdapter
+  OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidatorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidator

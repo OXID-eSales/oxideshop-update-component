@@ -1,14 +1,14 @@
 OXID eShop update component
 ===========================
 
-This component is a helper for updating the OXID eShop compilation from v6.5 to v7.0.
+This component is a helper for updating the OXID eShop compilation from v7.x to v8.
 
 ## Installation
 
  - run the following command to install the component:
 
 ```bash
-composer require oxid-esales/oxideshop-update-component:^v2.0.0
+composer require oxid-esales/oxideshop-update-component:^v3.0.0
 ```
 
  - clear the eShop cache.
