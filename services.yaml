@@ -7,6 +7,16 @@ services:
     tags:
       - { name: 'console.command', command: 'oe:update:migrate-config' }
 
+  oxid_esales.oxid_eshop_update_component.command.refactor_module_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\RefactorModuleCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:refactor-module' }
+
+  oxid_esales.oxid_eshop_update_component.command.update_module_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\UpdateModuleCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:update-module' }
+
   OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider:
     class: OxidEsales\OxidEshopUpdateComponent\Config\ConfigurationPathProvider
 
@@ -24,3 +34,15 @@ services:
 
   OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidatorInterface:
     class: OxidEsales\OxidEshopUpdateComponent\Config\Validator\ConfigurationValidator
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Update\ModuleUpdaterInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Update\ModuleUpdater
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Validator\ModuleValidatorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Validator\ModuleValidator
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Process\ProcessRunnerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Process\ProcessRunner
+
+  OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactoryInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\Module\Factory\RectorConfigFactory
