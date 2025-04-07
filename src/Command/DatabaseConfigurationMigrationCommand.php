@@ -28,7 +28,7 @@ class DatabaseConfigurationMigrationCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Migrates database configuration to parameters.yaml files');
+        $this->setDescription('Migrates configuration values from the database to parameters.yaml files');
         $this->addArgument(
             $this->removeOldParametersOption,
             InputArgument::OPTIONAL,
