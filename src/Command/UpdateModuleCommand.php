@@ -53,6 +53,12 @@ class UpdateModuleCommand extends Command
                 't',
                 InputOption::VALUE_NONE,
                 'Update transaction related code'
+            )
+            ->addOption(
+                'database',
+                'd',
+                InputOption::VALUE_NONE,
+                'Update database dbal related code'
             );
     }
 
@@ -64,14 +70,14 @@ class UpdateModuleCommand extends Command
         $io->title(sprintf('Starting module update for module at "%s"', $modulePath));
 
         $customSets = [];
-        foreach (['config', 'facts', 'transaction'] as $option) {
+        foreach (['config', 'facts', 'transaction', 'database'] as $option) {
             if ($input->getOption($option)) {
                 $customSets[$option] = true;
             }
         }
 
         if (empty($customSets)) {
-            $io->note('No update rules selected. Use -c, -f, or -t options to apply specific updates.');
+            $io->note('No update rules selected. Use -c, -f, -t or -d options to apply specific updates.');
             return Command::SUCCESS;
         }
 

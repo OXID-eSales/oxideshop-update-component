@@ -49,7 +49,8 @@ final class RectorTest extends AbstractRectorTestCase
             customSets: [
                 'config' => true,
                 'facts' => true,
-                'transaction' => true
+                'transaction' => true,
+                'database' => true
             ]
         );
 
