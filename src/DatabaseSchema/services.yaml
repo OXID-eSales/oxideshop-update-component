@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseSchema\Updater\DropColumnsFromOxarticlesUpdater:
+    tags:
+      - { name: database.updater }
+
+  OxidEsales\OxidEshopUpdateComponent\DatabaseSchema\DatabaseSchemaModifierInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\DatabaseSchema\DatabaseSchemaModifier
+    arguments:
+      $updaters: !tagged_iterator database.updater
