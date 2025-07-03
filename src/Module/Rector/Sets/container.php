@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-use OxidEsales\OxidEshopUpdateComponent\Module\Rector\Rules\ConfigParamReplacementRule;
+use OxidEsales\OxidEshopUpdateComponent\Module\Rector\Rules\ContainerBuilderFactoryReplacementRule;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->rule(ConfigParamReplacementRule::class);
+    $rectorConfig->rule(ContainerBuilderFactoryReplacementRule::class);
 };

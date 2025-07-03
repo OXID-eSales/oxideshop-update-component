@@ -59,6 +59,12 @@ class UpdateModuleCommand extends Command
                 'd',
                 InputOption::VALUE_NONE,
                 'Update database dbal related code'
+            )
+            ->addOption(
+                'container',
+                'b',
+                InputOption::VALUE_NONE,
+                'Update container builder factory usage'
             );
     }
 
@@ -70,14 +76,14 @@ class UpdateModuleCommand extends Command
         $io->title(sprintf('Starting module update for module at "%s"', $modulePath));
 
         $customSets = [];
-        foreach (['config', 'facts', 'transaction', 'database'] as $option) {
+        foreach (['config', 'facts', 'transaction', 'database', 'container'] as $option) {
             if ($input->getOption($option)) {
                 $customSets[$option] = true;
             }
         }
 
         if (empty($customSets)) {
-            $io->note('No update rules selected. Use -c, -f, -t or -d options to apply specific updates.');
+            $io->note('No update rules selected. Use -c, -f, -t, -d or -b options to apply specific updates.');
             return Command::SUCCESS;
         }
 

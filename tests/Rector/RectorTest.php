@@ -50,7 +50,8 @@ final class RectorTest extends AbstractRectorTestCase
                 'config' => true,
                 'facts' => true,
                 'transaction' => true,
-                'database' => true
+                'database' => true,
+                'container' => true
             ]
         );
 
