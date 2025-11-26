@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\ProductImage\Migration\ProductImageMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ProductImage\Migration\ProductImageMigrator

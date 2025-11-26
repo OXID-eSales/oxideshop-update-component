@@ -3,5 +3,6 @@ imports:
   - { resource: src/Config/services.yaml }
   - { resource: src/DatabaseConfig/services.yaml }
   - { resource: src/Module/services.yaml }
+  - { resource: src/ProductImage/services.yaml }
   - { resource: src/Template/services.yaml }
   - { resource: src/DatabaseSchema/services.yaml }
