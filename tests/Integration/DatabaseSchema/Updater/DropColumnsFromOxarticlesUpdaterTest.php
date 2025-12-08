@@ -10,12 +10,14 @@ declare(strict_types=1);
 namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\DatabaseSchema\Updater;
 
 use OxidEsales\EshopCommunity\Internal\Framework\Database\ConnectionFactoryInterface;
+use OxidEsales\EshopCommunity\Tests\ContainerTrait;
 use OxidEsales\EshopCommunity\Tests\DatabaseTrait;
-use OxidEsales\EshopCommunity\Tests\Integration\IntegrationTestCase;
 use OxidEsales\OxidEshopUpdateComponent\DatabaseSchema\Updater\DropColumnsFromOxarticlesUpdater;
+use PHPUnit\Framework\TestCase;
 
-final class DropColumnsFromOxarticlesUpdaterTest extends IntegrationTestCase
+final class DropColumnsFromOxarticlesUpdaterTest extends TestCase
 {
+    use ContainerTrait;
     use DatabaseTrait;
 
     public function tearDown(): void

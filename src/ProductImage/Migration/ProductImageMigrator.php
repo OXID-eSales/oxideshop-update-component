@@ -158,7 +158,7 @@ class ProductImageMigrator implements ProductImageMigratorInterface
             $fileName = $product['OXICON'];
             $path = Path::join($this->productsPicturesDirectory, "icon/$fileName");
 
-            $mediaRows[] = [$mediaId, $path];
+            $mediaRows[] = [$mediaId, $path, $this->getMimeType($path)];
             $productMediaRows[] = [
                 $productMediaId,
                 $productId,
@@ -174,7 +174,7 @@ class ProductImageMigrator implements ProductImageMigratorInterface
             $fileName = $product['OXTHUMB'];
             $path = Path::join($this->productsPicturesDirectory, "thumb/$fileName");
 
-            $mediaRows[] = [$mediaId, $path];
+            $mediaRows[] = [$mediaId, $path, $this->getMimeType($path)];
             $productMediaRows[] = [
                 $productMediaId,
                 $productId,

@@ -57,10 +57,10 @@ final class ProductImageMigratorTest extends IntegrationTestCase
         $this->runMigration();
 
         $this->assertProductMediaCount($productId, 4);
-        $this->assertMediaExists('master/product/1/product1_pic1.jpg');
-        $this->assertMediaExists('master/product/2/product1_pic2.jpg');
-        $this->assertMediaExists('master/product/icon/product1_icon.jpg');
-        $this->assertMediaExists('master/product/thumb/product1_thumb.jpg');
+        $this->assertMediaExists('out/pictures/master/product/1/product1_pic1.jpg');
+        $this->assertMediaExists('out/pictures/master/product/2/product1_pic2.jpg');
+        $this->assertMediaExists('out/pictures/master/product/icon/product1_icon.jpg');
+        $this->assertMediaExists('out/pictures/master/product/thumb/product1_thumb.jpg');
         $this->assertProductHasRole($productId, 'detail', 2);
         $this->assertProductHasRole($productId, 'icon', 1);
         $this->assertProductHasRole($productId, 'thumbnail', 1);
@@ -76,8 +76,8 @@ final class ProductImageMigratorTest extends IntegrationTestCase
         $this->runMigration();
 
         $this->assertProductMediaCount($productId, 2);
-        $this->assertMediaExists('master/product/1/product_pic1.jpg');
-        $this->assertMediaExists('master/product/3/product_pic3.jpg');
+        $this->assertMediaExists('out/pictures/master/product/1/product_pic1.jpg');
+        $this->assertMediaExists('out/pictures/master/product/3/product_pic3.jpg');
         $this->assertProductHasRole($productId, 'detail', 2);
     }
 
@@ -179,6 +179,23 @@ final class ProductImageMigratorTest extends IntegrationTestCase
         $this->assertEquals([0, 0], $positions);
     }
 
+    public function testMigrateCreatesCorrectMimeTypes(): void
+    {
+        $this->createProduct([
+            'OXPIC1' => 'product.jpg',
+            'OXPIC2' => 'product.png',
+            'OXICON' => 'icon.gif',
+            'OXTHUMB' => 'thumb.webp',
+        ]);
+
+        $this->runMigration();
+
+        $this->assertMediaHasType('out/pictures/master/product/1/product.jpg', 'image/jpeg');
+        $this->assertMediaHasType('out/pictures/master/product/2/product.png', 'image/png');
+        $this->assertMediaHasType('out/pictures/master/product/icon/icon.gif', 'image/gif');
+        $this->assertMediaHasType('out/pictures/master/product/thumb/thumb.webp', 'image/webp');
+    }
+
     private function runMigration(): void
     {
         foreach ($this->migrator->migrate() as $progress) {
@@ -255,6 +272,17 @@ final class ProductImageMigratorTest extends IntegrationTestCase
         )->fetchOne();
 
         $this->assertEquals(1, $count, "Media with path '$path' should exist");
+    }
+
+    private function assertMediaHasType(string $path, string $expectedType): void
+    {
+        $connection = $this->get(ConnectionFactoryInterface::class)->create();
+        $type = $connection->executeQuery(
+            'SELECT type FROM oxmedia WHERE path = ?',
+            [$path]
+        )->fetchOne();
+
+        $this->assertEquals($expectedType, $type, "Media with path '$path' should have type '$expectedType'");
     }
 
     private function assertProductHasRole(string $productId, string $role, int $expectedCount): void
