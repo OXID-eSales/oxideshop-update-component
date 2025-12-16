@@ -13,5 +13,7 @@ use Iterator;
 
 interface ProductImageMigratorInterface
 {
-    public function migrate(int $batchSize = 5000): Iterator;
+    public function migrateProducts(int $batchSize = 5000): Iterator;
+
+    public function migrateVariants(int $batchSize = 5000): Iterator;
 }

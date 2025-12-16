@@ -42,21 +42,15 @@ class ProductImageMigrationCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $batchSize = (int) $input->getArgument('batch-size');
 
-        $io->info("Starting product image migration with batch size: $batchSize");
-
-        $progressBar = $io->createProgressBar();
-
         try {
-            foreach ($this->productImageMigrator->migrate($batchSize) as $progress) {
-                $progressBar->setMaxSteps($progress['total']);
-                $progressBar->setProgress($progress['processed']);
-            }
+            $io->section('Migrating product images');
+            $this->runMigration($io, $this->productImageMigrator->migrateProducts($batchSize));
 
-            $progressBar->finish();
-            $io->newLine(2);
+            $io->section('Migrating variant images');
+            $this->runMigration($io, $this->productImageMigrator->migrateVariants($batchSize));
+
             $io->success('Product images successfully migrated!');
         } catch (Throwable $exception) {
-            $progressBar->display();
             $io->newLine(2);
             $io->error('Unexpected Error: ' . $exception->getMessage());
 
@@ -64,5 +58,24 @@ class ProductImageMigrationCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    private function runMigration(SymfonyStyle $io, \Iterator $migration): void
+    {
+        $progressBar = null;
+
+        foreach ($migration as $progress) {
+            if ($progressBar === null) {
+                $progressBar = $io->createProgressBar($progress['total']);
+            }
+
+            $progressBar->setMaxSteps($progress['total']);
+            $progressBar->setProgress($progress['processed']);
+        }
+
+        if ($progressBar !== null) {
+            $progressBar->finish();
+        }
+        $io->newLine(2);
     }
 }
