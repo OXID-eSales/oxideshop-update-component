@@ -29,7 +29,6 @@ class RefactorModuleCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('oe:update:refactor-module')
             ->setDescription('Applies general code refactoring to a module')
             ->addArgument(
                 'module-path',

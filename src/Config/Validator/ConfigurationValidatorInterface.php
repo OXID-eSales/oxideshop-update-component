@@ -5,8 +5,6 @@
  * See LICENSE file for license details.
  */
 
-declare(strict_types=1);
-
 namespace OxidEsales\OxidEshopUpdateComponent\Config\Validator;
 
 interface ConfigurationValidatorInterface

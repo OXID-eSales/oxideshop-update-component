@@ -68,7 +68,11 @@ PHP;
             'strictBooleans',
         ];
         $setParams = array_map(
-            fn(string $set): string => sprintf('%s: %s', $set, in_array($set, $configuration->preparedSets, true) ? 'true' : 'false'),
+            fn(string $set): string => sprintf(
+                '%s: %s',
+                $set,
+                in_array($set, $configuration->preparedSets, true) ? 'true' : 'false'
+            ),
             $defaultSets
         );
         return "\n    ->withPreparedSets(" . implode(', ', $setParams) . ")";

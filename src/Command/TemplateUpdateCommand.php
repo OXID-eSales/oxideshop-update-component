@@ -37,7 +37,7 @@ class TemplateUpdateCommand extends Command
                 InputArgument::REQUIRED,
                 'The directory containing template files to update.'
             )
-            ->setDescription('Updates template files in the specified directory.');
+            ->setDescription('Migrates Twig filter usage in template files (e.g. date_format() to date()).');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

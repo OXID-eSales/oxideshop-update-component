@@ -42,16 +42,10 @@ class DatabaseConfigurationMigrationCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $shouldRemoveOldParameters = (bool) $input->getArgument($this->removeOldParametersOption);
 
-        try {
-            $migrationService = $this->migrationFactory->createMigrationService($shouldRemoveOldParameters);
-            $migrationService->migrateDatabaseToContainerConfiguration();
+        $migrationService = $this->migrationFactory->createMigrationService($shouldRemoveOldParameters);
+        $migrationService->migrateDatabaseToContainerConfiguration();
 
-            $io->success('Database configuration successfully migrated!');
-        } catch (\Throwable $exception) {
-            $io->error('Unexpected Error: ' . $exception->getMessage());
-
-            return Command::FAILURE;
-        }
+        $io->success('Database configuration successfully migrated!');
 
         return Command::SUCCESS;
     }

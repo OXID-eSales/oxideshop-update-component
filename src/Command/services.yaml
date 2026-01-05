@@ -5,7 +5,7 @@ services:
   oxid_esales.oxid_eshop_update_component.command.migrate_config_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateConfigCommand
     tags:
-      - { name: 'console.command', command: 'oe:update:config-file' }
+      - { name: 'console.command', command: 'oe:update:migrate-config-file' }
 
   oxid_esales.oxid_eshop_update_component.command.refactor_module_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\RefactorModuleCommand
@@ -15,22 +15,22 @@ services:
   oxid_esales.oxid_eshop_update_component.command.update_module_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\UpdateModuleCommand
     tags:
-      - { name: 'console.command', command: 'oe:update:update-module' }
+      - { name: 'console.command', command: 'oe:update:upgrade-module' }
 
   oxid_esales.oxid_eshop_update_component.command.update_template_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\TemplateUpdateCommand
     tags:
-      - { name: 'console.command', command: 'oe:update:update-templates' }
+      - { name: 'console.command', command: 'oe:update:migrate-template-filters' }
 
   oxid_esales.oxid_eshop_update_component.command.database_config_migration_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\DatabaseConfigurationMigrationCommand
     tags:
-      - { name: 'console.command', command: 'oe:update:config-database' }
+      - { name: 'console.command', command: 'oe:update:migrate-config-database' }
 
-  oxid_esales.oxid_eshop_update_component.command.database_update_schema_command:
-    class: OxidEsales\OxidEshopUpdateComponent\Command\DatabaseSchemaUpdateCommand
+  oxid_esales.oxid_eshop_update_component.command.drop_legacy_image_columns_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\DropLegacyImageColumnsCommand
     tags:
-      - { name: 'console.command', command: 'oe:update:database-schema' }
+      - { name: 'console.command', command: 'oe:update:drop-legacy-oxarticles-image-columns' }
 
   oxid_esales.oxid_eshop_update_component.command.product_image_migration_command:
     class: OxidEsales\OxidEshopUpdateComponent\Command\ProductImageMigrationCommand

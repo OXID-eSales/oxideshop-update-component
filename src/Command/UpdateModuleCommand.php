@@ -29,8 +29,7 @@ class UpdateModuleCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('oe:update:update-module')
-            ->setDescription('Updates module code to be compatible with OXID eShop 8')
+            ->setDescription('Upgrades module code to be compatible with OXID eShop 8')
             ->addArgument(
                 'module-path',
                 InputArgument::REQUIRED,

@@ -65,7 +65,7 @@ class ConfigurationTransformerTest extends TestCase
         $this->assertEquals('https://img.example.com', $result['oxid_esales.alternative_image_url']);
         $this->assertTrue($result['oxid_esales.log_not_seo_urls']);
         $this->assertEquals(['jpg', 'png'], $result['oxid_esales.allowed_uploaded_types']);
-        $this->assertNull($result['oxid_esales.force_session_start']);
+        $this->assertArrayNotHasKey('oxid_esales.force_session_start', $result);
     }
 
     public function testEmptyArrayValuesAreNotTransformed(): void

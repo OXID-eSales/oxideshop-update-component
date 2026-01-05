@@ -67,8 +67,7 @@ class DatabaseToContainerConfigurationMigrator implements DatabaseToContainerCon
     private function filterDuplicateContainerParameters(
         array $containerParameters,
         SymfonyContainerBuilder $container
-    ): array
-    {
+    ): array {
         return array_filter(
             $containerParameters,
             fn($value, $parameterName) =>

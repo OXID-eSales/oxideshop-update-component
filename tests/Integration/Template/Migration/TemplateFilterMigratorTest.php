@@ -21,6 +21,7 @@ final class TemplateFilterMigratorTest extends TestCase
     use ContainerTrait;
 
     private string $temporaryOldTemplatePath;
+    private TemplateFilterMigrator $migrator;
 
     protected function setUp(): void
     {

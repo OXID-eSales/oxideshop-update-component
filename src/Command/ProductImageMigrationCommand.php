@@ -15,7 +15,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Throwable;
 
 class ProductImageMigrationCommand extends Command
 {
@@ -42,20 +41,13 @@ class ProductImageMigrationCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $batchSize = (int) $input->getArgument('batch-size');
 
-        try {
-            $io->section('Migrating product images');
-            $this->runMigration($io, $this->productImageMigrator->migrateProducts($batchSize));
+        $io->section('Migrating product images');
+        $this->runMigration($io, $this->productImageMigrator->migrateProducts($batchSize));
 
-            $io->section('Migrating variant images');
-            $this->runMigration($io, $this->productImageMigrator->migrateVariants($batchSize));
+        $io->section('Migrating variant images');
+        $this->runMigration($io, $this->productImageMigrator->migrateVariants($batchSize));
 
-            $io->success('Product images successfully migrated!');
-        } catch (Throwable $exception) {
-            $io->newLine(2);
-            $io->error('Unexpected Error: ' . $exception->getMessage());
-
-            return Command::FAILURE;
-        }
+        $io->success('Product images successfully migrated!');
 
         return Command::SUCCESS;
     }

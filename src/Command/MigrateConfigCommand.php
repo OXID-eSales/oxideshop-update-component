@@ -25,9 +25,7 @@ class MigrateConfigCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setName('oe:update:migrate-config')
-            ->setDescription('Migrates config.inc.php to .env and parameters.yaml files');
+        $this->setDescription('Migrates config.inc.php to .env and parameters.yaml files');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
