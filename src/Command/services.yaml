@@ -36,3 +36,23 @@ services:
     class: OxidEsales\OxidEshopUpdateComponent\Command\ProductImageMigrationCommand
     tags:
       - { name: 'console.command', command: 'oe:update:migrate-product-images' }
+
+  oxid_esales.oxid_eshop_update_component.command.migrate_theme_metadata_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateThemeMetadataCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:migrate-theme-metadata' }
+
+  oxid_esales.oxid_eshop_update_component.command.migrate_theme_configuration_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateThemeConfigurationCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:migrate-theme-configuration' }
+
+  oxid_esales.oxid_eshop_update_component.command.migrate_theme_templates_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\MigrateThemeTemplatesCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:migrate-theme-templates' }
+
+  oxid_esales.oxid_eshop_update_component.command.remove_theme_configuration_command:
+    class: OxidEsales\OxidEshopUpdateComponent\Command\RemoveThemeConfigurationCommand
+    tags:
+      - { name: 'console.command', command: 'oe:update:remove-theme-configuration' }

@@ -6,3 +6,6 @@ imports:
   - { resource: src/ProductImage/services.yaml }
   - { resource: src/Template/services.yaml }
   - { resource: src/DatabaseSchema/services.yaml }
+  - { resource: src/ThemeMetadata/services.yaml }
+  - { resource: src/ThemeSettings/services.yaml }
+  - { resource: src/ThemeTemplate/services.yaml }
