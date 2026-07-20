@@ -1,0 +1,24 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Transformer\GetThemeSettingTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Transformer\GetThemeSettingTransformer
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Migration\ThemeTemplateMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Migration\ThemeTemplateMigrator
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Reader\ReferencedThemeSettingReaderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Reader\ReferencedThemeSettingReader
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Configuration\ThemeSettingsConfigFileInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Configuration\ThemeSettingsConfigFile
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Resolver\UndeclaredThemeSettingResolverInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Resolver\UndeclaredThemeSettingResolver
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Reference\ThemeSettingReferenceInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Reference\ThemeSettingReference
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Builder\InteractiveThemeSettingBuilderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Builder\InteractiveThemeSettingBuilder

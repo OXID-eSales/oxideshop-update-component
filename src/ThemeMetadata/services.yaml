@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Reader\ThemeFileReaderInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Reader\ThemeFileReader
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Transformer\ThemeDataTransformerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Transformer\ThemeDataTransformer
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Writer\YamlFileWriterInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Writer\YamlFileWriter
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Installer\BootstrapThemeConfigurationInstallerInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Installer\BootstrapThemeConfigurationInstaller
+
+  OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Migration\ThemeFileMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Migration\ThemeFileMigrator
