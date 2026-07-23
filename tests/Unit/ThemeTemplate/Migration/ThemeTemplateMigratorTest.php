@@ -27,12 +27,12 @@ class ThemeTemplateMigratorTest extends TestCase
         $filesystem = new Filesystem();
         $filesystem->dumpFile(
             Path::join($this->themeDirectory, 'config.yaml'),
-            "themeSettings:\n  blShowWishlist:\n    type: bool\n  sLogoFile:\n    type: str\n"
+            "themeSettings:\n  showWishlist:\n    type: bool\n  logoFile:\n    type: str\n"
             . "  productsPerPage:\n    type: num\n    value: '20'\n"
         );
         $filesystem->dumpFile(
             Path::join($this->themeDirectory, 'tpl', 'page.html.twig'),
-            "{% if oViewConf.getViewThemeParam('blShowWishlist') %}"
+            "{% if oViewConf.getViewThemeParam('bl_showWishlist') %}"
             . "{{ oViewConf.getViewThemeParam('sLogoFile') }}"
             . "{{ oViewConf.getViewThemeParam('productsPerPage') }}{% endif %}"
         );
@@ -53,8 +53,8 @@ class ThemeTemplateMigratorTest extends TestCase
             ->migrate($this->themeDirectory);
 
         $this->assertSame(
-            "{% if oViewConf.getThemeSettings().getBoolean('blShowWishlist') %}"
-            . "{{ oViewConf.getThemeSettings().getString('sLogoFile') }}"
+            "{% if oViewConf.getThemeSettings().getBoolean('showWishlist') %}"
+            . "{{ oViewConf.getThemeSettings().getString('logoFile') }}"
             . "{{ oViewConf.getThemeSettings().getInteger('productsPerPage') }}{% endif %}",
             file_get_contents(Path::join($this->themeDirectory, 'tpl', 'page.html.twig'))
         );

@@ -22,29 +22,29 @@ class GetThemeSettingTransformerTest extends TestCase
         $this->transformer = new GetThemeSettingTransformer(new ThemeSettingReference());
     }
 
-    public function testTransformRewritesStringSetting(): void
+    public function testTransformRenamesAndRewritesStandardSetting(): void
     {
         $result = $this->transformer->transform(
             "{{ oViewConf.getViewThemeParam('sLogoFile') }}",
-            ['sLogoFile' => ['type' => 'str']]
+            ['logoFile' => ['type' => 'str']]
         );
 
-        $this->assertSame("{{ oViewConf.getThemeSettings().getString('sLogoFile') }}", $result);
+        $this->assertSame("{{ oViewConf.getThemeSettings().getString('logoFile') }}", $result);
     }
 
-    public function testTransformUsesTypedGetterForKnownTypes(): void
+    public function testTransformUsesTypedGetterForRenamedSettings(): void
     {
-        $template = "{% if oViewConf.getViewThemeParam('blShowWishlist') %}"
+        $template = "{% if oViewConf.getViewThemeParam('bl_showWishlist') %}"
             . "{{ oViewConf.getViewThemeParam('aNrofCatArticles') }}";
 
         $result = $this->transformer->transform($template, [
-            'blShowWishlist' => ['type' => 'bool'],
-            'aNrofCatArticles' => ['type' => 'arr'],
+            'showWishlist' => ['type' => 'bool'],
+            'numberOfCategoryProducts' => ['type' => 'arr'],
         ]);
 
         $this->assertSame(
-            "{% if oViewConf.getThemeSettings().getBoolean('blShowWishlist') %}"
-            . "{{ oViewConf.getThemeSettings().getCollection('aNrofCatArticles') }}",
+            "{% if oViewConf.getThemeSettings().getBoolean('showWishlist') %}"
+            . "{{ oViewConf.getThemeSettings().getCollection('numberOfCategoryProducts') }}",
             $result
         );
     }

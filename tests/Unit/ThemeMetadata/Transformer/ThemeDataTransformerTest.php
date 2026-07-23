@@ -70,6 +70,20 @@ class ThemeDataTransformerTest extends TestCase
         );
     }
 
+    public function testToSettingsConfigurationRenamesStandardSettingsAndKeepsCustomOnes(): void
+    {
+        $result = $this->transformer->toSettingsConfiguration([
+            'settings' => [
+                ['name' => 'sLogoFile', 'type' => 'str', 'value' => 'logo.svg', 'group' => 'logo'],
+                ['name' => 'sPartnerCustomSetting', 'type' => 'str', 'value' => 'x', 'group' => 'custom'],
+            ],
+        ]);
+
+        $this->assertArrayHasKey('logoFile', $result['themeSettings']);
+        $this->assertArrayNotHasKey('sLogoFile', $result['themeSettings']);
+        $this->assertArrayHasKey('sPartnerCustomSetting', $result['themeSettings']);
+    }
+
     public function testToSettingsConfigurationCastsBooleanValues(): void
     {
         $result = $this->transformer->toSettingsConfiguration([

@@ -59,6 +59,18 @@ final class ThemeSettingsMigratorTest extends IntegrationTestCase
         $this->assertFalse($this->get(ThemeConfigurationDaoInterface::class)->exists('partnerTheme', self::SHOP_ID));
     }
 
+    public function testMigrateRenamesStandardSettingToNewName(): void
+    {
+        $this->installThemeConfiguration();
+        $this->insertThemeConfigValue('str', 'sLogoFile', 'partnerLogo.svg');
+
+        $this->get(ThemeSettingsMigratorInterface::class)->migrate();
+
+        $configuration = $this->getThemeConfiguration();
+        $this->assertSame('partnerLogo.svg', $configuration->getSettingByName('logoFile')->getValue());
+        $this->assertNull($configuration->getSettingByName('sLogoFile'));
+    }
+
     public function testMigrateActivatesThemeConfiguredAsActiveInDatabase(): void
     {
         $this->installThemeConfiguration();
