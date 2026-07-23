@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\ThemeMetadata\Transformer;
 
+use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\ThemeSettingRenameMap;
+
 readonly class ThemeDataTransformer implements ThemeDataTransformerInterface
 {
     private const METADATA_KEYS = [
@@ -42,7 +44,7 @@ readonly class ThemeDataTransformer implements ThemeDataTransformerInterface
         $themeSettings = [];
 
         foreach ($themeData['settings'] ?? [] as $setting) {
-            $themeSettings[$setting['name']] = $this->toSettingEntry($setting);
+            $themeSettings[ThemeSettingRenameMap::getNewName($setting['name'])] = $this->toSettingEntry($setting);
         }
 
         return ['themeSettings' => $themeSettings];

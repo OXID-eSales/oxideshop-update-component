@@ -14,6 +14,7 @@ use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\DataObject\
 use OxidEsales\EshopCommunity\Internal\Framework\Theme\Setting\Setting;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\Fetcher\ThemeConfigurationFetcherInterface;
+use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\ThemeSettingRenameMap;
 
 readonly class ThemeSettingsMigrator implements ThemeSettingsMigratorInterface
 {
@@ -78,17 +79,18 @@ readonly class ThemeSettingsMigrator implements ThemeSettingsMigratorInterface
 
     private function applySetting(ThemeConfiguration $configuration, array $setting): void
     {
-        $existingSetting = $configuration->getSettingByName($setting['name']);
+        $newName = ThemeSettingRenameMap::getNewName($setting['name']);
+        $settingToUpdate = $configuration->getSettingByName($newName);
 
-        if ($existingSetting !== null) {
-            $existingSetting->setValue($setting['value']);
+        if ($settingToUpdate !== null) {
+            $settingToUpdate->setValue($setting['value']);
 
             return;
         }
 
         $configuration->addThemeSetting(
             (new Setting())
-                ->setName($setting['name'])
+                ->setName($newName)
                 ->setType($setting['type'])
                 ->setValue($setting['value'])
         );

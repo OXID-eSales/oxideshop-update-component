@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Transformer;
 
+use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\ThemeSettingRenameMap;
 use OxidEsales\OxidEshopUpdateComponent\ThemeTemplate\Reference\ThemeSettingReferenceInterface;
 
 readonly class GetThemeSettingTransformer implements GetThemeSettingTransformerInterface
@@ -21,10 +22,11 @@ readonly class GetThemeSettingTransformer implements GetThemeSettingTransformerI
     {
         return $this->themeSettingReference->replace(
             $templateContent,
-            function (string $name, string $quote) use ($settings): string {
-                $getter = $this->getterForSetting($settings[$name] ?? []);
+            function (string $originalName, string $quote) use ($settings): string {
+                $newName = ThemeSettingRenameMap::getNewName($originalName);
+                $getter = $this->getterForSetting($settings[$newName] ?? $settings[$originalName] ?? []);
 
-                return "oViewConf.getThemeSettings().$getter($quote$name$quote)";
+                return "oViewConf.getThemeSettings().$getter($quote$newName$quote)";
             }
         );
     }
