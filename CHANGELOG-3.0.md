@@ -5,10 +5,6 @@
 ### Added
 
 - Functionality for upgrading the OXID eShop compilation from v7.x to the next major version
-- `oe:update:migrate-theme-metadata` command to migrate a theme's `theme.php` to `metadata.yaml` and `config.yaml`
-- `oe:update:migrate-theme-configuration` command to migrate theme settings and the active theme state from the `oxconfig` table to the theme YAML configuration
-- `oe:update:migrate-theme-templates` command to rewrite `getViewThemeParam()` template calls to the typed theme setting service
-- `oe:update:remove-theme-configuration` command to remove theme configuration data from the `oxconfig` table
 
 ### Removed
 
