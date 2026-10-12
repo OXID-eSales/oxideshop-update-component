@@ -11,10 +11,13 @@ namespace OxidEsales\OxidEshopUpdateComponent\Tests\Integration\ThemeSettings\Mi
 
 use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\Dao\ThemeConfigurationDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\DataObject\Setting;
 use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\DataObject\ThemeConfiguration;
-use OxidEsales\EshopCommunity\Internal\Framework\Theme\Setting\Setting;
+use OxidEsales\EshopCommunity\Internal\Transition\Utility\BasicContextInterface;
 use OxidEsales\EshopCommunity\Tests\Integration\IntegrationTestCase;
+use OxidEsales\EshopCommunity\Tests\TestContainerFactory;
 use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\Migration\ThemeSettingsMigratorInterface;
+use Symfony\Component\Filesystem\Path;
 
 final class ThemeSettingsMigratorTest extends IntegrationTestCase
 {
@@ -76,7 +79,7 @@ final class ThemeSettingsMigratorTest extends IntegrationTestCase
 
         $this->get(ThemeSettingsMigratorInterface::class)->migrate();
 
-        $this->assertTrue($this->getThemeConfiguration()->isActivated());
+        $this->assertSame(self::THEME_ID, $this->getActiveThemeParameter());
     }
 
     public function testMigratePrefersCustomThemeAsActiveTheme(): void
@@ -88,9 +91,16 @@ final class ThemeSettingsMigratorTest extends IntegrationTestCase
 
         $this->get(ThemeSettingsMigratorInterface::class)->migrate();
 
-        $dao = $this->get(ThemeConfigurationDaoInterface::class);
-        $this->assertTrue($dao->get('customChildTheme', self::SHOP_ID)->isActivated());
-        $this->assertFalse($dao->get(self::THEME_ID, self::SHOP_ID)->isActivated());
+        $this->assertSame('customChildTheme', $this->getActiveThemeParameter());
+    }
+
+    public function testMigrateDoesNotActivateThemeWithoutConfiguration(): void
+    {
+        $this->insertConfigValue('str', 'sTheme', 'partnerTheme');
+
+        $this->get(ThemeSettingsMigratorInterface::class)->migrate();
+
+        $this->assertNotSame('partnerTheme', $this->getActiveThemeParameter());
     }
 
     public function testMigrateWithoutThemeDataChangesNothing(): void
@@ -109,7 +119,12 @@ final class ThemeSettingsMigratorTest extends IntegrationTestCase
     {
         $configuration = (new ThemeConfiguration())
             ->setId($themeId)
-            ->setSource('source/Application/views/' . $themeId)
+            ->setSource(
+                Path::makeRelative(
+                    __DIR__ . '/Fixtures/' . $themeId,
+                    $this->get(BasicContextInterface::class)->getShopRootPath()
+                )
+            )
             ->addThemeSetting(
                 (new Setting())->setName('sKnownSetting')->setType('str')->setValue('defaultValue')->setGroupName('display')
             )
@@ -160,6 +175,11 @@ final class ThemeSettingsMigratorTest extends IntegrationTestCase
                 'value' => $value,
             ])
             ->executeStatement();
+    }
+
+    private function getActiveThemeParameter(): string
+    {
+        return (new TestContainerFactory())->create(self::SHOP_ID)->getParameter('oxid_esales.theme.active');
     }
 
     private function getThemeConfiguration(): ThemeConfiguration

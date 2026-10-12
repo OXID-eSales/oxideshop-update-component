@@ -9,9 +9,10 @@ declare(strict_types=1);
 
 namespace OxidEsales\OxidEshopUpdateComponent\ThemeSettings\Migration;
 
+use OxidEsales\EshopCommunity\Internal\Framework\Theme\Activation\Service\ThemeActivationServiceInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\Dao\ThemeConfigurationDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\DataObject\Setting;
 use OxidEsales\EshopCommunity\Internal\Framework\Theme\Configuration\DataObject\ThemeConfiguration;
-use OxidEsales\EshopCommunity\Internal\Framework\Theme\Setting\Setting;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\Fetcher\ThemeConfigurationFetcherInterface;
 use OxidEsales\OxidEshopUpdateComponent\ThemeSettings\ThemeSettingRenameMap;
@@ -22,6 +23,7 @@ readonly class ThemeSettingsMigrator implements ThemeSettingsMigratorInterface
         private ContextInterface $context,
         private ThemeConfigurationFetcherInterface $themeConfigurationFetcher,
         private ThemeConfigurationDaoInterface $themeConfigurationDao,
+        private ThemeActivationServiceInterface $themeActivationService,
     ) {
     }
 
@@ -67,14 +69,11 @@ readonly class ThemeSettingsMigrator implements ThemeSettingsMigratorInterface
     {
         $activeThemeId = $this->themeConfigurationFetcher->fetchActiveThemeId($shopId);
 
-        if ($activeThemeId === '') {
+        if ($activeThemeId === '' || !$this->themeConfigurationDao->exists($activeThemeId, $shopId)) {
             return;
         }
 
-        foreach ($this->themeConfigurationDao->getAll($shopId) as $configuration) {
-            $configuration->setActivated($configuration->getId() === $activeThemeId);
-            $this->themeConfigurationDao->save($configuration, $shopId);
-        }
+        $this->themeActivationService->activate($activeThemeId, $shopId);
     }
 
     private function applySetting(ThemeConfiguration $configuration, array $setting): void
