@@ -30,6 +30,17 @@ final class ThemeConfigurationRemoverTest extends IntegrationTestCase
         $this->assertSame(0, $this->countConfigValues('oxvarname IN (:names)', ['names' => ['sTheme', 'sCustomTheme']]));
     }
 
+    public function testRemoveDeletesThemeSettingDisplayConfiguration(): void
+    {
+        $this->insertDisplayConfiguration('theme:apex', 'sLogoFile');
+        $this->insertDisplayConfiguration('module:testModule', 'testSetting');
+
+        $this->get(ThemeConfigurationRemoverInterface::class)->remove();
+
+        $this->assertSame(0, $this->countDisplayConfigurations('theme:apex'));
+        $this->assertSame(1, $this->countDisplayConfigurations('module:testModule'));
+    }
+
     public function testRemoveKeepsNonThemeConfigurationData(): void
     {
         $this->insertConfigValue('theme:apex', 'sLogoFile', 'logo.png');
@@ -61,6 +72,34 @@ final class ThemeConfigurationRemoverTest extends IntegrationTestCase
                 'value' => $value,
             ])
             ->executeStatement();
+    }
+
+    private function insertDisplayConfiguration(string $module, string $name): void
+    {
+        $this->get(QueryBuilderFactoryInterface::class)->create()
+            ->insert('oxconfigdisplay')
+            ->values([
+                'oxid' => ':id',
+                'oxcfgmodule' => ':module',
+                'oxcfgvarname' => ':name',
+            ])
+            ->setParameters([
+                'id' => substr(md5(uniqid('removertest', true)), 0, 32),
+                'module' => $module,
+                'name' => $name,
+            ])
+            ->executeStatement();
+    }
+
+    private function countDisplayConfigurations(string $module): int
+    {
+        return (int) $this->get(QueryBuilderFactoryInterface::class)->create()
+            ->select('count(*)')
+            ->from('oxconfigdisplay')
+            ->where('oxcfgmodule = :module')
+            ->setParameter('module', $module)
+            ->executeQuery()
+            ->fetchOne();
     }
 
     private function countConfigValues(string $condition, array $parameters): int
