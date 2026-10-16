@@ -23,6 +23,21 @@ readonly class ThemeConfigurationRemover implements ThemeConfigurationRemoverInt
 
     public function remove(): void
     {
+        $this->removeThemeSettingDisplayConfiguration();
+        $this->removeThemeSettings();
+    }
+
+    private function removeThemeSettingDisplayConfiguration(): void
+    {
+        $this->queryBuilderFactory->create()
+            ->delete('oxconfigdisplay')
+            ->where('oxcfgmodule LIKE :themeModulePattern')
+            ->setParameter('themeModulePattern', self::MODULE_THEME_PREFIX . '%')
+            ->executeStatement();
+    }
+
+    private function removeThemeSettings(): void
+    {
         $this->queryBuilderFactory->create()
             ->delete('oxconfig')
             ->where('oxmodule LIKE :themeModulePattern')

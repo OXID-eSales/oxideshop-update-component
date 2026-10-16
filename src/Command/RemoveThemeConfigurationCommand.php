@@ -31,7 +31,7 @@ class RemoveThemeConfigurationCommand extends Command
     {
         $this
             ->addOption($this->forceOption, null, InputOption::VALUE_NONE, 'Skip the confirmation prompt.')
-            ->setDescription('Removes all theme configuration data from the oxconfig table.');
+            ->setDescription('Removes all theme configuration data from the oxconfig and oxconfigdisplay tables.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -39,7 +39,7 @@ class RemoveThemeConfigurationCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->warning(
-            'This permanently removes all theme settings and the active theme state from the oxconfig table. '
+            'This permanently removes all theme settings and the active theme state from the database. '
             . 'Make sure the theme configuration has been migrated to the YAML configuration first.'
         );
 
@@ -57,7 +57,7 @@ class RemoveThemeConfigurationCommand extends Command
             return Command::FAILURE;
         }
 
-        $io->success('Theme configuration data has been removed from the oxconfig table.');
+        $io->success('Theme configuration data has been removed from the database.');
 
         return Command::SUCCESS;
     }
