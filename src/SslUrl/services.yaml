@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autowire: true
+
+  OxidEsales\OxidEshopUpdateComponent\SslUrl\Migration\SslUrlConfigurationMigratorInterface:
+    class: OxidEsales\OxidEshopUpdateComponent\SslUrl\Migration\SslUrlConfigurationMigrator

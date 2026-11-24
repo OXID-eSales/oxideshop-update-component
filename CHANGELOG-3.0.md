@@ -9,6 +9,7 @@
 - `oe:update:migrate-theme-configuration` command to migrate theme settings and the active theme from the `oxconfig` table to theme YAML configuration, including renamed standard theme settings
 - `oe:update:migrate-theme-templates` command to replace `getViewThemeParam()` calls in templates with the typed theme setting service
 - `oe:update:remove-theme-configuration` command to remove theme configuration data from the `oxconfig` and `oxconfigdisplay` tables
+- `oe:update:migrate-ssl-url-configuration` command to migrate `sMallSSLShopURL` and `aLanguageSSLURLs` to `sMallShopURL` and `aLanguageURLs` (SSL values win) and remove the SSL variables from the `oxconfig` table
 
 ### Removed
 
